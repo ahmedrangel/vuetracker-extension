@@ -1,0 +1,48 @@
+{
+  "name": "vuetracker-extension",
+  "title": "VueTracker",
+  "description": "VueTracker",
+  "private": true,
+  "version": "0.0.3",
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox",
+    "compile": "vue-tsc --noEmit",
+    "postinstall": "wxt prepare",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@iconify/vue": "^4.3.0",
+    "@tailwindcss/vite": "^4.1.4",
+    "tailwindcss": "^4.1.4",
+    "vue": "^3.5.13",
+    "vuetracker-analyzer": "^0.3.0"
+  },
+  "devDependencies": {
+    "@eslint/compat": "^1.2.8",
+    "@stylistic/eslint-plugin": "^4.2.0",
+    "@types/chrome": "^0.0.317",
+    "@types/fs-extra": "^11.0.4",
+    "@typescript-eslint/eslint-plugin": "^8.31.0",
+    "@vue/eslint-config-typescript": "^14.5.0",
+    "@vueuse/core": "^13.1.0",
+    "@wxt-dev/auto-icons": "^1.0.2",
+    "@wxt-dev/module-vue": "^1.0.2",
+    "eslint": "^9.25.1",
+    "eslint-import-resolver-typescript": "^4.3.4",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-vue": "^10.0.0",
+    "fs-extra": "^11.3.0",
+    "sharp": "^0.34.1",
+    "typescript": "5.8.3",
+    "ufo": "^1.6.1",
+    "vue-tsc": "^2.2.10",
+    "wxt": "^0.20.5"
+  },
+  "packageManager": "pnpm@10.9.0"
+}

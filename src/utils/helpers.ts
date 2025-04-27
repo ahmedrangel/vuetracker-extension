@@ -1,0 +1,58 @@
+import { frameworks, modules, plugins, uis } from "./technologies";
+
+export const getTechnologyMetas = (type: "framework" | "module" | "plugin" | "ui", slug?: string) => {
+  if (!slug) return undefined;
+  const technology = [frameworks, modules, plugins, uis];
+  const types = ["framework", "module", "plugin", "ui"] as const;
+  const index = types.indexOf(type);
+  const technologyType = technology[index];
+  if (!technologyType) return undefined;
+  const map = Object.fromEntries(Object.entries(technologyType).map(([key, { metas }]) => [metas.slug, { key, metas }]));
+  return map[slug]?.metas || undefined;
+};
+
+export const findFavicon = (icons?: VueTrackerResponse["meta"]["icons"]) => {
+  if (!icons?.length) return null;
+  const favicon = icons.find(el => el.url.includes("/favicon.ico")) || icons[0];
+  return favicon?.url;
+};
+
+export const normalizeSITE = (url?: string) => {
+  return url?.replace("https://", "")?.replace(/\/$/, "");
+};
+
+export const fixOgImage = (hostname?: string, url?: string | null) => {
+  if (!url || !hostname) return undefined;
+  if (url.startsWith("//")) return `https:${url}`;
+  if (url.startsWith("/")) return `https://${hostname}${url}`;
+  return url;
+};
+
+export const getCurrentTabId = async () => {
+  const currentTab = await browser.tabs.query({ active: true, currentWindow: true });
+  const tabActive = currentTab.find(tab => tab.active || null);
+  return tabActive?.id;
+};
+
+export const disableTab = async (tabId?: number) => {
+  if (!tabId) {
+    await browser.action.disable();
+    await browser.action.setIcon({ path: { 16: "icons/16-gray.png", 32: "icons/32-gray.png", 48: "icons/48-gray.png", 128: "icons/128-gray.png" } });
+    return;
+  }
+  await browser.action.disable(tabId);
+  await browser.action.setIcon({ path: { 16: "icons/16-gray.png", 32: "icons/32-gray.png", 48: "icons/48-gray.png", 128: "icons/128-gray.png" } });
+};
+
+export const executeAnalyzer = async (tabId?: number) => {
+  if (!tabId) return disableTab();
+  await disableTab(tabId);
+  await browser.scripting.executeScript({
+    target: { tabId },
+    world: "MAIN",
+    injectImmediately: true,
+    files: ["content-scripts/injected.js"]
+  });
+};
+
+export const callDisable = () => window.postMessage({ type: "disable", data: null }, { targetOrigin: "*" });
