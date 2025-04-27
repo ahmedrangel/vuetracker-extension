@@ -1,7 +1,7 @@
 {
   "name": "vuetracker-extension",
   "title": "VueTracker",
-  "description": "VueTracker",
+  "description": "Browser extension for discovering the plugins and technologies powering websites built with Vue",
   "private": true,
   "version": "0.0.3",
   "type": "module",

@@ -1,5 +1,7 @@
 # VueTracker Extension
+Browser extension for discovering the plugins and technologies powering websites built with Vue.
 
+# Screenshots
 ![screenshot-1](/screenshots/ss-1.png)
 
 ![screenshot-2](/screenshots/ss-2.png)
