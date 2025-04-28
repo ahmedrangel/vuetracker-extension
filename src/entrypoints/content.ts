@@ -1,8 +1,8 @@
 export default defineContentScript({
   matches: ["<all_urls>"],
-  main: () => {
+  main: (ctx) => {
     window.addEventListener("message", (event) => {
-      browser.runtime.sendMessage(event.data).catch(console.info);
+      if (ctx.isValid) browser.runtime.sendMessage(event.data).catch(() => null);
     });
   }
 });
