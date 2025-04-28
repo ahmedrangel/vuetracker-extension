@@ -10,7 +10,7 @@ const scripting = await browser.scripting.executeScript({
 }).catch(() => disableTab(tabId));
 const location = scripting?.[0]?.result as string;
 const key = normalizeKey(normalizeSITE(location));
-const { state: data, isLoading } = useStoredValue<VueTrackerResponse>(`session:analyzed:${key}`);
+const { state: data } = useStoredValue<VueTrackerResponse>(`session:analyzed:${key}`);
 const framework = computed(() => data.value?.framework);
 const ui = computed(() => data.value?.ui);
 const sitePlugins = computed(() => data.value?.plugins);
@@ -54,7 +54,7 @@ const siteInfo = computed<{ title: string, value?: string, icon?: string | null,
         <span class="text-green-600 dark:text-primary-400">Vue</span>Tracker
       </a>
     </div>
-    <div v-if="!isLoading && data">
+    <div v-if="data">
       <div class="flex flex-col gap-2 mb-3">
         <div class="flex gap-2 items-center justify-between">
           <div class="flex flex-col gap-0.5 text-start">
@@ -74,7 +74,7 @@ const siteInfo = computed<{ title: string, value?: string, icon?: string | null,
       </div>
       <TrackerDetails :site-info="siteInfo" :site-plugins="sitePlugins" :site-modules="siteModules" />
     </div>
-    <div v-else-if="isLoading">
+    <div v-else>
       <div class="flex justify-center items-center h-32 gap-2">
         <Icon icon="eos-icons:loading" class="text-green-600" height="32" />
         <span class="text-lg font-semibold">Loading...</span>
