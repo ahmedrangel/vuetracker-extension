@@ -26,11 +26,13 @@ export default defineBackground(() => {
   browser.runtime.onMessage.addListener((message) => {
     if (message.type === "analyze") {
       getCurrentTabId().then(async (tabId) => {
-        await browser.action.enable(tabId);
-        await browser.action.setPopup({ popup: "popup-ext.html" });
-        await browser.action.setIcon({ path: { 16: "icons/16.png", 32: "icons/32.png", 48: "icons/48.png", 128: "icons/128.png" } });
+        await Promise.allSettled([
+          browser.action.enable(tabId),
+          browser.action.setPopup({ popup: "popup-ext.html" }),
+          browser.action.setIcon({ path: { 16: "icons/16.png", 32: "icons/32.png", 48: "icons/48.png", 128: "icons/128.png" } })
+        ]);
       }).catch(() => disableTab());
-      const key = normalizeSITE(message.data.url)?.replace(/[-./]/g, "_");
+      const key = normalizeKey(normalizeSITE(message.data.url));
       storage.setItem(`session:analyzed:${key}`, message.data).catch(console.info);
     }
     else if (message.type === "disable") {

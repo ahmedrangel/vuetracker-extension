@@ -21,6 +21,11 @@ export const normalizeSITE = (url?: string) => {
   return url?.replace("https://", "")?.replace(/\/$/, "");
 };
 
+export const normalizeKey = (key?: string) => {
+  if (!key) return;
+  return key.replace(/[-./]/g, "_");
+};
+
 export const fixOgImage = (hostname?: string, url?: string | null) => {
   if (!url || !hostname) return undefined;
   if (url.startsWith("//")) return `https:${url}`;

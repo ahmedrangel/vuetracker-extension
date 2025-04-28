@@ -9,7 +9,7 @@ const scripting = await browser.scripting.executeScript({
   func: () => window.location.href
 }).catch(() => disableTab(tabId));
 const location = scripting?.[0]?.result as string;
-const key = normalizeSITE(location)?.replace(/[-./]/g, "_");
+const key = normalizeKey(normalizeSITE(location));
 const { state: data, isLoading } = useStoredValue<VueTrackerResponse>(`session:analyzed:${key}`);
 const framework = computed(() => data.value?.framework);
 const ui = computed(() => data.value?.ui);
