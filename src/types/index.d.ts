@@ -26,6 +26,25 @@ declare global {
     hasSSR: boolean;
     vueVersion?: string;
   }
+
+  // Extend the Element and Window interfaces
+  interface Element {
+    __vue__?: { $root?: { constructor?: { version?: string } } };
+    __vue_app__?: { version?: string };
+  }
+
+  interface Window {
+    Vue?: { version?: string };
+    $nuxt?: { $root?: { constructor?: { version?: string } } };
+    __unctx__?: {
+      get: (key: string) => {
+        use: () => { versions?: { nuxt?: string } };
+      };
+    };
+    trustedTypes: {
+      createPolicy: (name: string, rules: { [x: string]: (input: string) => string }) => { [x: string]: (input: string) => string };
+    };
+  }
 }
 
 export {};

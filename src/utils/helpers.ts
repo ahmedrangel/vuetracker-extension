@@ -65,3 +65,13 @@ export const executeAnalyzer = async (tabId?: number) => {
 };
 
 export const callDisable = () => window.postMessage({ type: "disable", data: null }, { targetOrigin: "*" });
+
+export const isTrustedEval = () => {
+  try {
+    window.eval(window.trustedTypes.createPolicy("vuetracker-policy", { createScript: (x: string) => x }).createScript(""));
+    return true;
+  }
+  catch {
+    return false;
+  }
+};

@@ -2,24 +2,6 @@
 import { parseURL } from "ufo";
 import { getFramework, getNuxtMeta, getNuxtModules, getPlugins, getUI, getVueMeta, hasVue } from "vuetracker-analyzer/tools";
 
-// Extend the Element and Window interfaces to include the vue and nuxt properties
-declare global {
-  interface Element {
-    __vue__?: { $root?: { constructor?: { version?: string } } };
-    __vue_app__?: { version?: string };
-  }
-
-  interface Window {
-    Vue?: { version?: string };
-    $nuxt?: { $root?: { constructor?: { version?: string } } };
-    __unctx__?: {
-      get: (key: string) => {
-        use: () => { versions?: { nuxt?: string } };
-      };
-    };
-  }
-}
-
 export const analyze = async () => {
   if (browser.runtime?.id) return callDisable(); // Prevent CSP issues in the browser console
   const completed = document.readyState === "complete";
@@ -40,6 +22,7 @@ export const analyze = async () => {
     retries++;
   }
 
+  if (!isTrustedEval()) return callDisable();
   const html = document.documentElement.outerHTML;
   const scripts = Array.from(document.getElementsByTagName("script")).map(({ src }) => src).filter(script => script);
   const page = { evaluate: (value: string) => window.eval(`(${value});`) };
