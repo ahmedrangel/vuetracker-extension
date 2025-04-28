@@ -40,15 +40,10 @@ export const analyze = async () => {
     retries++;
   }
 
-
-  const context = {
-    originalHtml: document.documentElement.outerHTML,
-    html: document.documentElement.outerHTML,
-    scripts: Array.from(document.getElementsByTagName("script")).map(({ src }) => src).filter(script => script),
-    page: {
-      evaluate: (value: string) => window.eval(`(${value});`)
-    }
-  };
+  const html = document.documentElement.outerHTML;
+  const scripts = Array.from(document.getElementsByTagName("script")).map(({ src }) => src).filter(script => script);
+  const page = { evaluate: (value: string) => window.eval(`(${value});`) };
+  const context = { originalHtml: html, html, scripts, page };
   const usesVue = await hasVue(context);
   if (!usesVue) return callDisable(); // No Vue detected, exit early
   const url = window.location.href;
@@ -57,6 +52,7 @@ export const analyze = async () => {
   const vueVersion = window.$nuxt?.$root?.constructor?.version || window.Vue?.version || [...document.querySelectorAll("*")].map((el) => el.__vue__?.$root?.constructor?.version || el.__vue_app__?.version).filter(Boolean)[0];
   const plugins = (await getPlugins(context))?.sort((a, b) => a.name.localeCompare(b.name)) as VueTrackerTechnology[];
   const ui = await getUI(context) as VueTrackerTechnology;
+  const { ssr } = await getVueMeta(context);
   const icons = Array.from(document.querySelectorAll("head > link[rel=\"icon\"], head > link[rel=\"shortcut icon\"]"))
     .map(element => ({
       url: (element as HTMLLinkElement).href,
@@ -80,7 +76,7 @@ export const analyze = async () => {
       ogImage: (document.querySelector("head > meta:is([property=\"og:image\"], [name=\"og:image\"])") as HTMLMetaElement)?.content || (document.querySelector("head > meta[property=\"twitter:image\"], head > meta[name=\"twitter:image\"]") as HTMLMetaElement)?.content || (document.querySelector("head > link[rel=\"image_src\"]") as HTMLLinkElement)?.href
     },
     vueVersion,
-    hasSSR: false, // default
+    hasSSR: ssr, // default
     isStatic: true, // default
     framework: null, // nuxt | gridsome | quasar | vuepress | iles
     frameworkModules: [],
@@ -91,8 +87,6 @@ export const analyze = async () => {
   if (rtaLabel && ["adult", "RTA-5042-1996-1400-1577-RTA"].includes(rtaLabel?.trim())) {
     infos.meta.isAdultContent = true;
   }
-  const { ssr } = await getVueMeta(context);
-  infos.hasSSR = ssr;
   const framework = await getFramework(context);
   // Get Nuxt modules if using Nuxt
   if (framework && framework.slug === "nuxtjs") {
