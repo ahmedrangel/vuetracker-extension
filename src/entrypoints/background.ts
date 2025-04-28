@@ -11,15 +11,13 @@ export default defineBackground(() => {
       executeAnalyzer(tabId).catch(() => disableTab(tabId));
     }
   });
+
   browser.tabs.onActivated.addListener(({ tabId }) => {
     executeAnalyzer(tabId).catch(() => disableTab(tabId));
   });
 
   browser.windows.onFocusChanged.addListener((windowId) => {
-    if (windowId === browser.windows.WINDOW_ID_NONE) {
-      disableTab().catch(console.info);
-      return;
-    }
+    if (windowId === browser.windows.WINDOW_ID_NONE) return;
     getCurrentTabId().then((tabId) => {
       executeAnalyzer(tabId).catch(() => disableTab(tabId).catch(console.info));
     }).catch(console.info);
