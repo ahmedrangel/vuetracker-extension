@@ -33,6 +33,7 @@
     "@vueuse/core": "^13.1.0",
     "@wxt-dev/auto-icons": "^1.0.2",
     "@wxt-dev/module-vue": "^1.0.2",
+    "changelogen": "^0.6.1",
     "eslint": "^9.25.1",
     "eslint-import-resolver-typescript": "^4.3.4",
     "eslint-plugin-import": "^2.31.0",
