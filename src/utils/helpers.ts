@@ -34,19 +34,23 @@ export const fixOgImage = (hostname?: string, url?: string | null) => {
 };
 
 export const getCurrentTabId = async () => {
-  const currentTab = await browser.tabs.query({ active: true, currentWindow: true });
+  const currentTab = await browser.tabs.query({ active: true, currentWindow: true, discarded: false, status: "complete" }).catch(() => []);
+  if (!currentTab?.length) return;
   const tabActive = currentTab.find(tab => tab.active || null);
   return tabActive?.id;
 };
 
 export const disableTab = async (tabId?: number) => {
-  if (!tabId) {
-    await browser.action.disable();
+  try {
+    if (!tabId) {
+      await browser.action.disable();
+      await browser.action.setIcon({ path: { 16: "icons/16-gray.png", 32: "icons/32-gray.png", 48: "icons/48-gray.png", 128: "icons/128-gray.png" } });
+      return;
+    }
+    await browser.action.disable(tabId);
     await browser.action.setIcon({ path: { 16: "icons/16-gray.png", 32: "icons/32-gray.png", 48: "icons/48-gray.png", 128: "icons/128-gray.png" } });
-    return;
   }
-  await browser.action.disable(tabId);
-  await browser.action.setIcon({ path: { 16: "icons/16-gray.png", 32: "icons/32-gray.png", 48: "icons/48-gray.png", 128: "icons/128-gray.png" } });
+  catch {}
 };
 
 export const executeAnalyzer = async (tabId?: number) => {
@@ -57,7 +61,7 @@ export const executeAnalyzer = async (tabId?: number) => {
     world: "MAIN",
     injectImmediately: true,
     files: ["content-scripts/injected.js"]
-  });
+  }).catch(() => null);
 };
 
 export const callDisable = () => window.postMessage({ type: "disable", data: null }, { targetOrigin: "*" });
