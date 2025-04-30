@@ -22,7 +22,7 @@ declare global {
     frameworkModules: VueTrackerTechnology[];
     plugins: VueTrackerTechnology[];
     ui: VueTrackerTechnology;
-    isStatic: boolean;
+    isStatic?: boolean;
     hasSSR: boolean;
     vueVersion?: string;
   }

@@ -17,11 +17,11 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@iconify/vue": "^4.3.0",
+    "@iconify/vue": "^5.0.0",
     "@tailwindcss/vite": "^4.1.4",
     "tailwindcss": "^4.1.4",
     "vue": "^3.5.13",
-    "vuetracker-analyzer": "^0.3.3"
+    "vuetracker-analyzer": "^0.3.4"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.8",
@@ -38,7 +38,7 @@
     "eslint": "^9.25.1",
     "eslint-import-resolver-typescript": "^4.3.4",
     "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-vue": "^10.0.1",
+    "eslint-plugin-vue": "^10.1.0",
     "fs-extra": "^11.3.0",
     "sharp": "^0.34.1",
     "typescript": "5.8.3",

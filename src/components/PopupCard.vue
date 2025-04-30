@@ -42,7 +42,7 @@ const siteInfo = computed<{ title: string, value?: string, icon?: string | null,
   },
   {
     title: "Deployment",
-    value: data.value.hasSSR && data.value.isStatic ? "Static" : data.value.hasSSR && !data.value.isStatic ? "Server" : undefined
+    value: data.value.hasSSR && data.value.isStatic ? "Static" : data.value.hasSSR && !data.value.isStatic && data.value.isStatic != undefined ? "Server" : undefined
   }];
 });
 </script>

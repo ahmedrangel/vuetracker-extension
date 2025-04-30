@@ -75,7 +75,7 @@ export const analyze = async () => {
     },
     vueVersion,
     hasSSR: ssr, // default
-    isStatic: true, // default
+    isStatic: undefined, // default
     framework: null, // nuxt | gridsome | quasar | vuepress | iles
     frameworkModules: [],
     plugins, // vue-router, vuex, vue-apollo, etc
