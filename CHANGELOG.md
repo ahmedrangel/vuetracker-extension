@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.1.2
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.1...v0.1.2)
+
+### 🩹 Fixes
+
+- IsStatic can be undefined ([260331e](https://github.com/ahmedrangel/vuetracker-extension/commit/260331e))
+
+### 🏡 Chore
+
+- Update pnpm-lock ([d70f3c6](https://github.com/ahmedrangel/vuetracker-extension/commit/d70f3c6))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.1
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.0...v0.1.1)
