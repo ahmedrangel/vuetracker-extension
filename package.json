@@ -3,7 +3,7 @@
   "title": "VueTracker",
   "description": "Browser extension for discovering the plugins and technologies powering websites built with Vue",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "scripts": {
     "dev": "wxt",
@@ -38,7 +38,7 @@
     "eslint": "^9.25.1",
     "eslint-import-resolver-typescript": "^4.3.4",
     "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-vue": "^10.0.0",
+    "eslint-plugin-vue": "^10.0.1",
     "fs-extra": "^11.3.0",
     "sharp": "^0.34.1",
     "typescript": "5.8.3",

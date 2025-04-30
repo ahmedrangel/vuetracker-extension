@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.1
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.0...v0.1.1)
+
+### 🚀 Enhancements
+
+- Sandboxjs evaluation implementation, use eval as fallback ([13b5149](https://github.com/ahmedrangel/vuetracker-extension/commit/13b5149))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.0
 
 
