@@ -1,6 +1,7 @@
 
 import { parseURL } from "ufo";
 import { getFramework, getNuxtMeta, getNuxtModules, getPlugins, getUI, getVueMeta, hasVue } from "vuetracker-analyzer/tools";
+import { useSandbox } from "./sandbox";
 
 export const analyze = async () => {
   if (browser.runtime?.id) return callDisable(); // Prevent CSP issues in the browser console
@@ -22,10 +23,24 @@ export const analyze = async () => {
     retries++;
   }
 
-  if (!isTrustedEval()) return callDisable();
   const html = document.documentElement.outerHTML;
   const scripts = Array.from(document.getElementsByTagName("script")).map(({ src }) => src).filter(script => script);
-  const page = { evaluate: (value: string) => window.eval(`(${value});`) };
+  const page = {
+    evaluate: async (value: string) => {
+      const sandbox = useSandbox();
+      try {
+        const exec = sandbox.compileAsync(`return ${value};`);
+        const sandboxed = await exec().run();
+        return sandboxed;
+      }
+      catch {
+        if (!isTrustedEval()) return;
+        return window.eval(`(${value})`);
+      }
+
+    }
+  };
+
   const context = { originalHtml: html, html, scripts, page };
   const usesVue = await hasVue(context);
   if (!usesVue) return callDisable(); // No Vue detected, exit early

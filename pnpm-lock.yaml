@@ -21,12 +21,15 @@ importers:
         specifier: ^3.5.13
         version: 3.5.13(typescript@5.8.3)
       vuetracker-analyzer:
-        specifier: ^0.3.1
-        version: 0.3.1(typescript@5.8.3)
+        specifier: ^0.3.3
+        version: 0.3.3(typescript@5.8.3)
     devDependencies:
       '@eslint/compat':
         specifier: ^1.2.8
         version: 1.2.8(eslint@9.25.1(jiti@2.4.2))
+      '@nyariv/sandboxjs':
+        specifier: ^0.8.24
+        version: 0.8.24
       '@stylistic/eslint-plugin':
         specifier: ^4.2.0
         version: 4.2.0(eslint@9.25.1(jiti@2.4.2))(typescript@5.8.3)
@@ -604,6 +607,9 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
+
+  '@nyariv/sandboxjs@0.8.24':
+    resolution: {integrity: sha512-Q6kHJXZHLN8fFBTw634qle0TMz3iPaDU49ouzhpXYY9dvekmeEZ0971SONKux7lTjXwQYEb5GatxrVXrbbMGCg==}
 
   '@pnpm/config.env-replace@1.1.0':
     resolution: {integrity: sha512-htyl8TWnKL7K/ESFa1oW2UB5lVDxuF5DpM7tBi6Hu2LNL3mWkIzNLG6N4zoCUP1lCKNxWy/3iu8mS8MvToGd6w==}
@@ -3633,8 +3639,8 @@ packages:
       typescript:
         optional: true
 
-  vuetracker-analyzer@0.3.1:
-    resolution: {integrity: sha512-s11/plsupdyIxnP4mDyf/j9l/IYHBTmxJl1akam3qxWbvyqtFI9fndVmq9M8d2w4yzGiRJcfBM5JIvqzi8js2A==}
+  vuetracker-analyzer@0.3.3:
+    resolution: {integrity: sha512-6Z/5Y0ShY4ukA6sA6Cb3FM7b8rdXfhdHU73w6dO/cmpPjFGPwsYfcx3N8Eh1Ch7wtNHlOJLazza6cr0Eb+OMGw==}
 
   watchpack@2.4.1:
     resolution: {integrity: sha512-8wrBCMtVhqcXP2Sup1ctSkga6uc2Bx0IIvKyT7yTFier5AXHooSI+QyQQAtTb7+E0IUCCKyTFmXqdqgum2XWGg==}
@@ -4171,6 +4177,8 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
+
+  '@nyariv/sandboxjs@0.8.24': {}
 
   '@pnpm/config.env-replace@1.1.0': {}
 
@@ -7519,7 +7527,7 @@ snapshots:
     optionalDependencies:
       typescript: 5.8.3
 
-  vuetracker-analyzer@0.3.1(typescript@5.8.3):
+  vuetracker-analyzer@0.3.3(typescript@5.8.3):
     dependencies:
       consola: 3.4.2
       puppeteer: 24.7.2(typescript@5.8.3)
