@@ -34,7 +34,7 @@ export const fixOgImage = (hostname?: string, url?: string | null) => {
 };
 
 export const getCurrentTabId = async () => {
-  const currentTab = await browser.tabs.query({ active: true, currentWindow: true, discarded: false, status: "complete" }).catch(() => []);
+  const currentTab = await browser.tabs.query({ active: true, currentWindow: true }).catch(() => []);
   if (!currentTab?.length) return;
   const tabActive = currentTab.find(tab => tab.active || null);
   return tabActive?.id;
@@ -68,9 +68,13 @@ export const callDisable = () => window.postMessage({ type: "disable", data: nul
 
 export const callAnalyze = (data: VueTrackerResponse) => window.postMessage({ type: "analyze", data }, { targetOrigin: "*" });
 
+export const trustedEval = (value: string) => {
+  const trustedScript = window.trustedTypes.createPolicy("vuetracker-policy", { createScript: (x: string) => x });
+  return window.eval(trustedScript.createScript(value));
+};
 export const isTrustedEval = () => {
   try {
-    window.eval(window.trustedTypes.createPolicy("vuetracker-policy", { createScript: (x: string) => x }).createScript(""));
+    trustedEval("1 + 1");
     return true;
   }
   catch {

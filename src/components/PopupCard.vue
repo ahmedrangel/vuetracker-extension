@@ -5,9 +5,9 @@ import useStoredValue from "@/composables/useStoredValue";
 
 const tabId = await getCurrentTabId();
 const scripting = await browser.scripting.executeScript({
-  target: { tabId: tabId || -1 },
+  target: { tabId: tabId! },
   func: () => window.location.href
-}).catch(() => disableTab(tabId));
+});
 const location = scripting?.[0]?.result as string;
 const key = normalizeKey(normalizeSITE(location));
 const { state: data } = useStoredValue<VueTrackerResponse>(`session:analyzed:${key}`);

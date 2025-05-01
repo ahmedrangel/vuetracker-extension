@@ -24,25 +24,23 @@ export default defineBackground(() => {
   });
 
   browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    const tabId = sender.tab?.id;
     if (message.type === "getCachedData" && message.key) {
       storage.getItem(`session:analyzed:${message.key}`).then((data) => {
         sendResponse({ type: "getCachedDataResponse", key: message.key, data, sender });
       }).catch(() => null);
     }
-
     if (message.type === "analyze") {
-      getCurrentTabId().then(async (tabId) => {
-        await Promise.allSettled([
-          browser.action.enable(tabId),
-          browser.action.setPopup({ popup: "popup-ext.html" }),
-          browser.action.setIcon({ path: { 16: "icons/16.png", 32: "icons/32.png", 48: "icons/48.png", 128: "icons/128.png" } })
-        ]);
-      }).catch(() => disableTab());
+      Promise.allSettled([
+        browser.action.setPopup({ popup: "popup-ext.html" }),
+        browser.action.enable(tabId),
+        browser.action.setIcon({ path: { 16: "icons/16.png", 32: "icons/32.png", 48: "icons/48.png", 128: "icons/128.png" } })
+      ]).catch(console.info);
       const key = normalizeKey(normalizeSITE(message.data.url));
       if (message.data.vueVersion) storage.setItem(`session:analyzed:${key}`, message.data).catch(console.info);
     }
     else if (message.type === "disable") {
-      getCurrentTabId().then((tabId) => disableTab(tabId)).catch(() => disableTab());
+      disableTab(tabId).catch(console.info);
     }
     return true; // Keep the message channel open for sendResponse
   });

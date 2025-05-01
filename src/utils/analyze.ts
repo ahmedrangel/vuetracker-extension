@@ -39,18 +39,19 @@ export const analyze = async () => {
 
   const html = document.documentElement.outerHTML;
   const scripts = Array.from(document.getElementsByTagName("script")).map(({ src }) => src).filter(script => script);
+  const isTrusted = isTrustedEval();
   const page = {
     evaluate: async (value: string) => {
       const sandbox = useSandbox();
       try {
-        if (isTrustedEval()) throw new Error("Trusted eval");
+        if (isTrusted) throw new Error("Trusted eval");
         const exec = sandbox.compileAsync(`return ${value};`);
         const sandboxed = await exec().run();
         return sandboxed;
       }
       catch {
-        if (!isTrustedEval()) return;
-        return window.eval(`(${value})`);
+        if (!isTrusted) return;
+        return trustedEval(`(${value});`);
       }
     }
   };
