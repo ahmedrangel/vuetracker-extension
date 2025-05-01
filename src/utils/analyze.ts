@@ -10,23 +10,28 @@ export const analyze = async () => {
 
   if (browser.runtime?.id) return callDisable(); // Prevent CSP issues in the browser console
 
-  const completed = document.readyState === "complete";
-  let loaded = completed;
-
-  if (!completed) {
-    document.addEventListener("readystatechange", () => {
-      if (document.readyState === "complete") {
-        loaded = true;
-      }
+  const icons = Array.from(document.querySelectorAll("head > link[rel=\"icon\"], head > link[rel=\"shortcut icon\"]"))
+    .map(element => ({
+      sizes: (element as HTMLLinkElement).sizes?.value || null,
+      url: (element as HTMLLinkElement).href
+    }))
+    .sort((a, b) => {
+      const aSize = Number(a.sizes?.split("x")[0]) || 0;
+      const bSize = Number(b.sizes?.split("x")[0]) || 0;
+      return bSize - aSize;
     });
-  }
+  const rtaLabel = (document.querySelector("head > meta[name=\"rating\"]") as HTMLMetaElement)?.content;
+  const meta = {
+    description: (document.querySelector("head > meta[property=\"description\"], head > meta[name=\"description\"]") as HTMLMetaElement)?.content,
+    icons, // { url, sizes }
+    isAdultContent: rtaLabel && ["adult", "RTA-5042-1996-1400-1577-RTA"].includes(rtaLabel?.trim()) ? true : false,
+    language: window.navigator.language,
+    ogImage: (document.querySelector("head > meta:is([property=\"og:image\"], [name=\"og:image\"])") as HTMLMetaElement)?.content,
+    siteName: (document.querySelector("head > meta[property=\"og:site_name\"], head > meta[name=\"og:site_name\"]") as HTMLMetaElement)?.content,
+    title: document.title
+  };
 
-  const maxRetries = 20;
-  let retries = 0;
-  while (!loaded && retries < maxRetries) {
-    await new Promise((resolve) => setTimeout(resolve, 300));
-    retries++;
-  }
+  if (data?.meta && JSON.stringify(meta) !== JSON.stringify(data?.meta)) data.meta = meta; // Update meta if it has changed
 
   if (data) return callAnalyze(data); // Cached data found, return it
 
@@ -47,7 +52,6 @@ export const analyze = async () => {
         if (!isTrustedEval()) return;
         return window.eval(`(${value})`);
       }
-
     }
   };
 
@@ -64,28 +68,11 @@ export const analyze = async () => {
   const plugins = (await getPlugins(context))?.sort((a, b) => a.name.localeCompare(b.name)) as VueTrackerTechnology[];
   const ui = await getUI(context) as VueTrackerTechnology;
   const { ssr } = await getVueMeta(context);
-  const icons = Array.from(document.querySelectorAll("head > link[rel=\"icon\"], head > link[rel=\"shortcut icon\"]"))
-    .map(element => ({
-      url: (element as HTMLLinkElement).href,
-      sizes: (element as HTMLLinkElement).sizes?.value || null
-    }))
-    .sort((a, b) => {
-      const aSize = Number(a.sizes?.split("x")[0]) || 0;
-      const bSize = Number(b.sizes?.split("x")[0]) || 0;
-      return bSize - aSize;
-    });
+
   const infos: VueTrackerResponse = {
     url,
     hostname: hostname,
-    meta: {
-      language: window.navigator.language,
-      title: document.title,
-      description: (document.querySelector("head > meta[property=\"description\"], head > meta[name=\"description\"]") as HTMLMetaElement)?.content,
-      siteName: (document.querySelector("head > meta[property=\"og:site_name\"], head > meta[name=\"og:site_name\"]") as HTMLMetaElement)?.content,
-      isAdultContent: false,
-      icons, // { url, sizes },
-      ogImage: (document.querySelector("head > meta:is([property=\"og:image\"], [name=\"og:image\"])") as HTMLMetaElement)?.content || (document.querySelector("head > meta[property=\"twitter:image\"], head > meta[name=\"twitter:image\"]") as HTMLMetaElement)?.content || (document.querySelector("head > link[rel=\"image_src\"]") as HTMLLinkElement)?.href
-    },
+    meta,
     vueVersion,
     hasSSR: ssr, // default
     isStatic: undefined, // default
@@ -94,10 +81,7 @@ export const analyze = async () => {
     plugins, // vue-router, vuex, vue-apollo, etc
     ui // vuetify | bootstrap-vue | element-ui | tailwindcss
   };
-  const rtaLabel = (document.querySelector("head > meta[property=\"og:site_name\"], head > meta[name=\"og:site_name\"]") as HTMLMetaElement)?.content;
-  if (rtaLabel && ["adult", "RTA-5042-1996-1400-1577-RTA"].includes(rtaLabel?.trim())) {
-    infos.meta.isAdultContent = true;
-  }
+
   const framework = await getFramework(context);
   // Get Nuxt modules if using Nuxt
   if (framework && framework.slug === "nuxtjs") {
