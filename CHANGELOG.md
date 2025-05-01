@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v0.1.3
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.2...v0.1.3)
+
+### 🚀 Enhancements
+
+- Send session cache if already analyzed + prefer using eval on trusted websites ([682366e](https://github.com/ahmedrangel/vuetracker-extension/commit/682366e))
+- Revalidate cached metadata ([7143b22](https://github.com/ahmedrangel/vuetracker-extension/commit/7143b22))
+
+### 🩹 Fixes
+
+- Set item when vue version exists ([5eb980d](https://github.com/ahmedrangel/vuetracker-extension/commit/5eb980d))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.2
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.1...v0.1.2)
