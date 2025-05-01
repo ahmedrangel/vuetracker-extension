@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.5
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.4...v0.1.5)
+
+### 🚀 Enhancements
+
+- Use trustedEval + fix improve popup behavior ([c9d3a88](https://github.com/ahmedrangel/vuetracker-extension/commit/c9d3a88))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.4
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.3...v0.1.4)
