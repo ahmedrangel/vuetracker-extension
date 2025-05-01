@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.4
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.3...v0.1.4)
+
+### 🩹 Fixes
+
+- Unedfined tabId ([dd4a968](https://github.com/ahmedrangel/vuetracker-extension/commit/dd4a968))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.3
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.2...v0.1.3)
