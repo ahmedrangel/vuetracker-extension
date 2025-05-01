@@ -66,6 +66,8 @@ export const executeAnalyzer = async (tabId?: number) => {
 
 export const callDisable = () => window.postMessage({ type: "disable", data: null }, { targetOrigin: "*" });
 
+export const callAnalyze = (data: VueTrackerResponse) => window.postMessage({ type: "analyze", data }, { targetOrigin: "*" });
+
 export const isTrustedEval = () => {
   try {
     window.eval(window.trustedTypes.createPolicy("vuetracker-policy", { createScript: (x: string) => x }).createScript(""));
@@ -74,4 +76,17 @@ export const isTrustedEval = () => {
   catch {
     return false;
   }
+};
+
+export const getCachedData = (key?: string): Promise<VueTrackerResponse | null> => {
+  window.postMessage({ type: "getCachedData", key }, { targetOrigin: "*" });
+  return new Promise((resolve) => {
+    if (!key) return resolve(null);
+    window.addEventListener("message", (event) => {
+      if (event.data.type === "getCachedDataContentResponse" && event.data.key === key) {
+        if (event.data.data) resolve(event.data.data);
+        else resolve(null);
+      }
+    });
+  });
 };

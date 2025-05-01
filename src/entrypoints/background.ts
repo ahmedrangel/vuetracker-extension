@@ -23,8 +23,14 @@ export default defineBackground(() => {
     }).catch(console.info);
   });
 
-  browser.runtime.onMessage.addListener((message) => {
-    if (message.type === "analyze") {
+  browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    console.info("Received message:", message.type);
+    if (message.type === "getCachedData" && message.key) {
+      storage.getItem(`session:analyzed:${message.key}`).then((data) => {
+        sendResponse({ type: "getCachedDataResponse", key: message.key, data, sender });
+      }).catch(() => null);
+    }
+    else if (message.type === "analyze") {
       getCurrentTabId().then(async (tabId) => {
         await Promise.allSettled([
           browser.action.enable(tabId),
@@ -38,5 +44,6 @@ export default defineBackground(() => {
     else if (message.type === "disable") {
       getCurrentTabId().then((tabId) => disableTab(tabId)).catch(() => disableTab());
     }
+    return true; // Keep the message channel open for sendResponse
   });
 });

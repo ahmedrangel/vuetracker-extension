@@ -2,9 +2,14 @@
 import { parseURL } from "ufo";
 import { getFramework, getNuxtMeta, getNuxtModules, getPlugins, getUI, getVueMeta, hasVue } from "vuetracker-analyzer/tools";
 import { useSandbox } from "./sandbox";
+import { vueTrackerConsole } from "./console";
 
 export const analyze = async () => {
+  const key = normalizeKey(normalizeSITE(String(window.location.href)));
+  const data = await getCachedData(key).catch(() => null);
+
   if (browser.runtime?.id) return callDisable(); // Prevent CSP issues in the browser console
+
   const completed = document.readyState === "complete";
   let loaded = completed;
 
@@ -23,12 +28,17 @@ export const analyze = async () => {
     retries++;
   }
 
+  if (data) return callAnalyze(data); // Cached data found, return it
+
+  vueTrackerConsole.info("Analyzing page...");
+
   const html = document.documentElement.outerHTML;
   const scripts = Array.from(document.getElementsByTagName("script")).map(({ src }) => src).filter(script => script);
   const page = {
     evaluate: async (value: string) => {
       const sandbox = useSandbox();
       try {
+        if (isTrustedEval()) throw new Error("Trusted eval");
         const exec = sandbox.compileAsync(`return ${value};`);
         const sandboxed = await exec().run();
         return sandboxed;
@@ -43,7 +53,10 @@ export const analyze = async () => {
 
   const context = { originalHtml: html, html, scripts, page };
   const usesVue = await hasVue(context);
-  if (!usesVue) return callDisable(); // No Vue detected, exit early
+  if (!usesVue) {
+    vueTrackerConsole.info("No Vue detected");
+    return callDisable(); // No Vue detected, exit early
+  }
   const url = window.location.href;
   const parsedURL = parseURL(url);
   const hostname = parsedURL.host;
@@ -108,11 +121,6 @@ export const analyze = async () => {
     }
   }
   infos.framework = framework;
-  // Send the analyzed data to the main content script
-  window.postMessage({
-    type: "analyze",
-    data: infos
-  }, {
-    targetOrigin: "*"
-  });
+  vueTrackerConsole.info("Analyzing completed.");
+  return callAnalyze(infos);
 };
