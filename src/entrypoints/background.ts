@@ -6,8 +6,8 @@ export default defineBackground(() => {
     disableTab().catch(console.info);
   });
 
-  browser.tabs.onUpdated.addListener((tabId, changeInfo) => {
-    if (changeInfo.status === "complete") {
+  browser.tabs.onUpdated.addListener((tabId, changeInfo, tabInfo) => {
+    if (changeInfo.status === "complete" && tabInfo.active) {
       executeAnalyzer(tabId).catch(() => disableTab(tabId));
     }
   });
