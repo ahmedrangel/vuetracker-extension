@@ -8,7 +8,7 @@ export const analyze = async () => {
   const key = normalizeKey(normalizeSITE(String(window.location.href)));
   const data = await getCachedData(key).catch(() => null);
 
-  if (browser.runtime?.id) return callDisable(); // Prevent CSP issues in the browser console
+  if (browser.runtime?.id) return; // Prevent CSP issues in the browser console
 
   const icons = Array.from(document.querySelectorAll("head > link[rel=\"icon\"], head > link[rel=\"shortcut icon\"]"))
     .map(element => ({
