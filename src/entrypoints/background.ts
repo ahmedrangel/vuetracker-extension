@@ -37,7 +37,17 @@ export default defineBackground(() => {
         browser.action.setIcon({ path: { 16: "icons/16.png", 32: "icons/32.png", 48: "icons/48.png", 128: "icons/128.png" } })
       ]).catch(console.info);
       const key = normalizeKey(normalizeSITE(message.data.url));
-      if (message.data.vueVersion) storage.setItem(`session:analyzed:${key}`, message.data).catch(console.info);
+      storage.getItem(`session:analyzed:${key}`).then((data) => {
+        if (message.data.vueVersion && !data) {
+          const decoratedText = vueTrackerConsole.info("Analysis completed.", message.data);
+          browser.scripting.executeScript({
+            target: { tabId: tabId! },
+            args: [decoratedText],
+            func: (text) => console.info(...text)
+          }).catch(console.info);
+          storage.setItem(`session:analyzed:${key}`, message.data).catch(console.info);
+        }
+      }).catch(console.info);
     }
     else if (message.type === "disable") {
       disableTab(tabId).catch(console.info);

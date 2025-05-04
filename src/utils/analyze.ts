@@ -104,6 +104,5 @@ export const analyze = async () => {
     }
   }
   infos.framework = framework;
-  vueTrackerConsole.info("Analysis completed.", infos);
   return callAnalyze(infos);
 };
