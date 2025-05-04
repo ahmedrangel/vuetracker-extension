@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.7
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.6...v0.1.7)
+
+### 🏡 Chore
+
+- Log analysis completed from background when vueVersion and is not cached ([ea5c2ed](https://github.com/ahmedrangel/vuetracker-extension/commit/ea5c2ed))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.6
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.5...v0.1.6)
