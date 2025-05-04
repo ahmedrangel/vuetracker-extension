@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v0.1.6
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.5...v0.1.6)
+
+### 🩹 Fixes
+
+- **background:** Execute analyzer when tab is active ([f1f390e](https://github.com/ahmedrangel/vuetracker-extension/commit/f1f390e))
+- **analyz:** Dont call tab disable when browser run time id exists ([c335b65](https://github.com/ahmedrangel/vuetracker-extension/commit/c335b65))
+
+### 🏡 Chore
+
+- Log when vue is detected + add the object result in completed log ([3d4dfd6](https://github.com/ahmedrangel/vuetracker-extension/commit/3d4dfd6))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.5
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.4...v0.1.5)
