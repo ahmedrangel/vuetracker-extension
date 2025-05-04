@@ -1,3 +1,4 @@
 export const vueTrackerConsole = {
-  info: (text: string) => console.info(`%c[VueTracker] %c[INFO] %c${text}`, "color: #00c950;", "color: #00aaff;", "color: inherit;")
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  info: (text: string, ...optionalParams: any[]) => console.info(`%c[VueTracker] %c[INFO] %c${text}`, "color: #00c950;", "color: #00aaff;", "color: inherit;", ...optionalParams)
 };

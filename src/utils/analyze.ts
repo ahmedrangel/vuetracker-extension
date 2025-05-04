@@ -35,8 +35,6 @@ export const analyze = async () => {
 
   if (data) return callAnalyze(data); // Cached data found, return it
 
-  vueTrackerConsole.info("Analyzing page...");
-
   const html = document.documentElement.outerHTML;
   const scripts = Array.from(document.getElementsByTagName("script")).map(({ src }) => src).filter(script => script);
   const isTrusted = isTrustedEval();
@@ -59,9 +57,9 @@ export const analyze = async () => {
   const context = { originalHtml: html, html, scripts, page };
   const usesVue = await hasVue(context);
   if (!usesVue) {
-    vueTrackerConsole.info("No Vue detected");
     return callDisable(); // No Vue detected, exit early
   }
+  vueTrackerConsole.info("Vue detected, starting analysis...");
   const url = window.location.href;
   const parsedURL = parseURL(url);
   const hostname = parsedURL.host;
@@ -106,6 +104,6 @@ export const analyze = async () => {
     }
   }
   infos.framework = framework;
-  vueTrackerConsole.info("Analyzing completed.");
+  vueTrackerConsole.info("Analysis completed.", infos);
   return callAnalyze(infos);
 };
