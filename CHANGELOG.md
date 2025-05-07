@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v0.1.8
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.7...v0.1.8)
+
+### 🩹 Fixes
+
+- Site deeployment info condition ([73bd880](https://github.com/ahmedrangel/vuetracker-extension/commit/73bd880))
+
+### 🏡 Chore
+
+- **release:** V0.1.7 ([11c2031](https://github.com/ahmedrangel/vuetracker-extension/commit/11c2031))
+- Update deps ([52ae0aa](https://github.com/ahmedrangel/vuetracker-extension/commit/52ae0aa))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.7
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.6...v0.1.7)
