@@ -27,7 +27,7 @@
     "@eslint/compat": "^1.2.9",
     "@nyariv/sandboxjs": "^0.8.25",
     "@stylistic/eslint-plugin": "^4.2.0",
-    "@types/chrome": "^0.0.321",
+    "@types/chrome": "^0.0.322",
     "@types/fs-extra": "^11.0.4",
     "@typescript-eslint/eslint-plugin": "^8.32.0",
     "@vue/eslint-config-typescript": "^14.5.0",
