@@ -18,7 +18,7 @@ export const findFavicon = (icons?: VueTrackerResponse["meta"]["icons"]) => {
 };
 
 export const normalizeSITE = (url?: string) => {
-  return url?.replace("https://", "")?.replace(/\/$/, "");
+  return url?.replace(/#.*$/, "")?.replace("https://", "")?.replace(/\/$/, "");
 };
 
 export const normalizeKey = (key?: string) => {
