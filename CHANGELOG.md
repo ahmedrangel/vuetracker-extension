@@ -1,6 +1,24 @@
 # Changelog
 
 
+## v0.1.9
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.8...v0.1.9)
+
+### 🩹 Fixes
+
+- Remove fragment identifiers from urls (to avoid analyzing multiple fragments from same location) ([1e0ac55](https://github.com/ahmedrangel/vuetracker-extension/commit/1e0ac55))
+
+### 🏡 Chore
+
+- **release:** V0.1.8 ([699a625](https://github.com/ahmedrangel/vuetracker-extension/commit/699a625))
+- Configure Renovate ([#1](https://github.com/ahmedrangel/vuetracker-extension/pull/1))
+- Update renovate config ([0843835](https://github.com/ahmedrangel/vuetracker-extension/commit/0843835))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.8
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.7...v0.1.8)
