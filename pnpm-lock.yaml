@@ -21,8 +21,8 @@ importers:
         specifier: ^3.5.13
         version: 3.5.13(typescript@5.8.3)
       vuetracker-analyzer:
-        specifier: ^0.3.7
-        version: 0.3.7(typescript@5.8.3)
+        specifier: ^0.3.8
+        version: 0.3.8(typescript@5.8.3)
     devDependencies:
       '@eslint/compat':
         specifier: ^1.2.9
@@ -3785,8 +3785,8 @@ packages:
       typescript:
         optional: true
 
-  vuetracker-analyzer@0.3.7:
-    resolution: {integrity: sha512-HE+syx+rWXlYuY7GBeLTVikbaFKUvyDNuAcW75dj/cg2lLzJJqlZFvZv/u/iBzUfTSRrXuaSVS9VBr0LMNoHyQ==}
+  vuetracker-analyzer@0.3.8:
+    resolution: {integrity: sha512-dAV0PzgO8UoDWkkPtaZKGU8oqsAaZlORjQfDI+GkhoKDVNBsyMpOpGypA0SgyZMnczYiElw7IrdoTBKUdXHk6g==}
 
   watchpack@2.4.2:
     resolution: {integrity: sha512-TnbFSbcOCcDgjZ4piURLCbJ3nJhznVh9kw6F6iokjiFPl8ONxe9A6nMDVXDiNbrSfLILs6vB07F7wLBrwPYzJw==}
@@ -7886,7 +7886,7 @@ snapshots:
     optionalDependencies:
       typescript: 5.8.3
 
-  vuetracker-analyzer@0.3.7(typescript@5.8.3):
+  vuetracker-analyzer@0.3.8(typescript@5.8.3):
     dependencies:
       consola: 3.4.2
       puppeteer: 24.8.2(typescript@5.8.3)
