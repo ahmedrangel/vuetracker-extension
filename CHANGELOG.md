@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v0.1.11
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.10...v0.1.11)
+
+### 🏡 Chore
+
+- Change vuetracker domain ([ef8a827](https://github.com/ahmedrangel/vuetracker-extension/commit/ef8a827))
+- Update pnpm-lock ([b6e5e82](https://github.com/ahmedrangel/vuetracker-extension/commit/b6e5e82))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.10
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.9...v0.1.10)
