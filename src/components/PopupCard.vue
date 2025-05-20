@@ -50,7 +50,7 @@ const siteInfo = computed<{ title: string, value?: string, icon?: string | null,
 <template>
   <div class="card">
     <div class="flex items-center justify-center">
-      <a target="_blank" href="https://vuetracker.nuxt.dev" class="font-bold text-xl mb-2">
+      <a target="_blank" href="https://vuetracker.pages.dev" class="font-bold text-xl mb-2">
         <span class="text-green-600 dark:text-primary-400">Vue</span>Tracker
       </a>
     </div>
