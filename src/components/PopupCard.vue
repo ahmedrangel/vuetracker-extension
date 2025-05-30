@@ -57,11 +57,11 @@ const siteInfo = computed<{ title: string, value?: string, icon?: string | null,
     <div v-if="data">
       <div class="flex flex-col gap-2 mb-3">
         <div class="flex gap-2 items-center justify-between">
-          <div class="flex flex-col gap-0.5 text-start">
-            <a target="_blank" :href="data.url" class="hover:underline w-fit">
+          <div class="flex flex-col gap-0.5 text-start overflow-hidden">
+            <a target="_blank" :href="data.url" class="hover:underline">
               <div class="flex gap-2 items-center justify-start">
                 <img v-if="data?.meta?.icons" :src="findFavicon(data.meta.icons) || `https://${data.hostname}/favicon.ico`" class="min-w-6 max-w-6 min-h-6 max-h-6">
-                <p class="text-base font-semibold">{{ normalizeSITE(data.url) }}</p>
+                <p class="text-base font-semibold truncate">{{ normalizeSITE(data.url) }}</p>
               </div>
             </a>
             <h4 class="text-sm font-semibold">{{ data.meta.title }}</h4>
