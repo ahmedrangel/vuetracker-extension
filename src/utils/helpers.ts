@@ -1,3 +1,4 @@
+import { parseURL } from "ufo";
 import { frameworks, modules, plugins, uis } from "./technologies";
 
 export const getTechnologyMetas = (type: "framework" | "module" | "plugin" | "ui", slug?: string) => {
@@ -18,7 +19,9 @@ export const findFavicon = (icons?: VueTrackerResponse["meta"]["icons"]) => {
 };
 
 export const normalizeSITE = (url?: string) => {
-  return url?.replace(/#.*$/, "")?.replace("https://", "")?.replace(/\/$/, "");
+  if (!url) return;
+  const { host, pathname } = parseURL(url);
+  return `${host}${pathname}`.replace(/\/$/, "");
 };
 
 export const normalizeKey = (key?: string) => {
