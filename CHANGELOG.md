@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v0.1.12
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.11...v0.1.12)
+
+### 🩹 Fixes
+
+- Remove queries from urls ([8ddc004](https://github.com/ahmedrangel/vuetracker-extension/commit/8ddc004))
+- Adjust card site url ([b121961](https://github.com/ahmedrangel/vuetracker-extension/commit/b121961))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.11
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.10...v0.1.11)
