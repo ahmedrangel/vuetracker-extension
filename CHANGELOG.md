@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.1.13
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.12...v0.1.13)
+
+### 🩹 Fixes
+
+- Improve vueVersion detector for vue 2 ([e1db77e](https://github.com/ahmedrangel/vuetracker-extension/commit/e1db77e))
+
+### 🏡 Chore
+
+- Lint ([fef683e](https://github.com/ahmedrangel/vuetracker-extension/commit/fef683e))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.12
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.11...v0.1.12)

@@ -3,7 +3,7 @@
   "title": "VueTracker",
   "description": "Browser extension for discovering the plugins and technologies powering websites built with Vue",
   "private": true,
-  "version": "0.1.12",
+  "version": "0.1.13",
   "type": "module",
   "scripts": {
     "dev": "wxt",
