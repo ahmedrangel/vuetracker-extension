@@ -63,7 +63,7 @@ export const analyze = async () => {
   const url = window.location.href;
   const parsedURL = parseURL(url);
   const hostname = parsedURL.host;
-  const vueVersion = window.$nuxt?.$root?.constructor?.version || window.Vue?.version || [...document.querySelectorAll("*")].map((el) => el.__vue__?.$root?.constructor?.version || el.__vue_app__?.version).filter(Boolean)[0];
+  const vueVersion = window.$nuxt?.$root?.constructor?.version || window.Vue?.version || [...document.querySelectorAll("*")].map((el) => el.__vue__?.$root?.constructor?.version || el?.__vue__?.$root?.$options?._base?.version || el.__vue_app__?.version).filter(Boolean)[0];
   const plugins = (await getPlugins(context))?.sort((a, b) => a.name.localeCompare(b.name)) as VueTrackerTechnology[];
   const ui = await getUI(context) as VueTrackerTechnology;
   const { ssr } = await getVueMeta(context);
