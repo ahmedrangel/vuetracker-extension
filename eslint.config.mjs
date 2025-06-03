@@ -13,7 +13,7 @@ export default defineConfigWithVueTs([
     files: ["**/*.js", "**/*.mjs", "**/*.ts", "**/*.vue"],
     plugins: {
       "@stylistic": stylistic,
-      "@typescript-eslint": tsPlugin,
+      "@typescript-eslint-plugin": tsPlugin,
       "import": importPlugin,
       "vue": pluginVue
     },
@@ -59,7 +59,7 @@ export default defineConfigWithVueTs([
       "import/no-self-import": "error",
       "import/order": "error",
       "import/newline-after-import": ["error", { count: 1 }],
-      "@typescript-eslint/consistent-type-imports": "error",
+      "@typescript-eslint-plugin/consistent-type-imports": "error",
       "vue/first-attribute-linebreak": ["error", { singleline: "ignore", multiline: "ignore" }],
       "vue/max-attributes-per-line": ["error", { singleline: 100 }],
       "vue/singleline-html-element-content-newline": ["off"],

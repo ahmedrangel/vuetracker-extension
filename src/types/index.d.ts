@@ -29,7 +29,7 @@ declare global {
 
   // Extend the Element and Window interfaces
   interface Element {
-    __vue__?: { $root?: { constructor?: { version?: string }, $options?: { _base?: { version?: string }} } };
+    __vue__?: { $root?: { constructor?: { version?: string }, $options?: { _base?: { version?: string } } } };
     __vue_app__?: { version?: string };
   }
 
