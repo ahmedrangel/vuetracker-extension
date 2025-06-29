@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.15
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.14...v0.1.15)
+
+### 🏡 Chore
+
+- Update deps ([be82ae3](https://github.com/ahmedrangel/vuetracker-extension/commit/be82ae3))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.14
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.12...v0.1.14)
