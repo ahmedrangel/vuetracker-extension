@@ -72,6 +72,9 @@ importers:
       fs-extra:
         specifier: ^11.3.0
         version: 11.3.0
+      iconify-browser-cache:
+        specifier: ^0.3.1
+        version: 0.3.1
       sharp:
         specifier: ^0.34.2
         version: 0.34.2
@@ -2178,6 +2181,9 @@ packages:
   human-signals@4.3.1:
     resolution: {integrity: sha512-nZXjEF2nbo7lIw3mgYjItAfgQXog3OjJogSbKa2CQIIvSGWcKgeJnQlNXip6NglNzYH45nSRiEVimMvYL8DDqQ==}
     engines: {node: '>=14.18.0'}
+
+  iconify-browser-cache@0.3.1:
+    resolution: {integrity: sha512-GTQaqzqi7flMcLqCOC503BP+y2PGkC+bHjeOhDg0NlClh5E+8+21Ldu7lx4Zid2Pi3JCZtJKKIxZN/bFWyM9uw==}
 
   ieee754@1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
@@ -5864,6 +5870,8 @@ snapshots:
   human-signals@2.1.0: {}
 
   human-signals@4.3.1: {}
+
+  iconify-browser-cache@0.3.1: {}
 
   ieee754@1.2.1: {}
 
