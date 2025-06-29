@@ -1,6 +1,26 @@
 # Changelog
 
 
+## v0.1.14
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.12...v0.1.14)
+
+### 🩹 Fixes
+
+- Improve vueVersion detector for vue 2 ([e1db77e](https://github.com/ahmedrangel/vuetracker-extension/commit/e1db77e))
+- **eslint:** Rule ([d9b1614](https://github.com/ahmedrangel/vuetracker-extension/commit/d9b1614))
+
+### 🏡 Chore
+
+- Lint ([fef683e](https://github.com/ahmedrangel/vuetracker-extension/commit/fef683e))
+- **release:** V0.1.13 ([006bb93](https://github.com/ahmedrangel/vuetracker-extension/commit/006bb93))
+- **renovate:** Add lockfile maintenance ([b556e1f](https://github.com/ahmedrangel/vuetracker-extension/commit/b556e1f))
+- Add iconify-browser-cache ([28635a7](https://github.com/ahmedrangel/vuetracker-extension/commit/28635a7))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.13
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.12...v0.1.13)
