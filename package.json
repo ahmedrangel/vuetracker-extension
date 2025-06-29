@@ -40,7 +40,7 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-vue": "^10.2.0",
     "fs-extra": "^11.3.0",
-    "iconify-browser-cache": "^0.3.1",
+    "iconify-browser-cache": "^0.4.0",
     "sharp": "^0.34.2",
     "typescript": "5.8.3",
     "ufo": "^1.6.1",
