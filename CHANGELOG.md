@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.16
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.15...v0.1.16)
+
+### 🏡 Chore
+
+- Adjust npmrc settings ([55d827d](https://github.com/ahmedrangel/vuetracker-extension/commit/55d827d))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.15
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.14...v0.1.15)
