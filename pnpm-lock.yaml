@@ -21,7 +21,7 @@ importers:
         specifier: ^3.5.17
         version: 3.5.17(typescript@5.8.3)
       vuetracker-analyzer:
-        specifier: ^0.3.12
+        specifier: ^0.3.13
         version: 0.3.13(typescript@5.8.3)
     devDependencies:
       '@eslint/compat':
