@@ -1,2 +1,5 @@
+shamefullyHoist: true
+strictPeerDependencies: false
+
 ignoredBuiltDependencies:
   - puppeteer
