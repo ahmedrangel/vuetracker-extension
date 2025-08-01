@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.1.17
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.16...v0.1.17)
+
+### 🩹 Fixes
+
+- Disable if vue version is not detected ([253f40e](https://github.com/ahmedrangel/vuetracker-extension/commit/253f40e))
+
+### 🏡 Chore
+
+- Lint ([9680608](https://github.com/ahmedrangel/vuetracker-extension/commit/9680608))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.16
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.15...v0.1.16)
