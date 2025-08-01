@@ -51,6 +51,7 @@ export default defineConfigWithVueTs([
       "@stylistic/space-in-parens": ["error", "never"],
       "@stylistic/template-curly-spacing": "error",
       "@stylistic/quote-props": ["error", "consistent-as-needed"],
+      "@stylistic/eol-last": ["error", "always"],
       "sort-imports": ["error", { ignoreDeclarationSort: true }],
       "import/first": "error",
       "import/no-duplicates": "error",
