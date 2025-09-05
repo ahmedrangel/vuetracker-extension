@@ -97,15 +97,3 @@ export const getCachedData = (key?: string): Promise<VueTrackerResponse | null> 
     });
   });
 };
-
-export const getHeaders = async (): Promise<Record<string, string>> => {
-  window.postMessage({ type: "get-headers" }, { targetOrigin: "*" });
-  return new Promise((resolve) => {
-    window.addEventListener("message", (event) => {
-      if (event.data.type === "getHeadersContentResponse") {
-        if (event.data.headers) resolve(event.data.headers);
-        else resolve({});
-      }
-    });
-  });
-};

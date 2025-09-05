@@ -7,10 +7,6 @@ import { vueTrackerConsole } from "./console";
 export const analyze = async () => {
   const key = normalizeKey(normalizeSITE(String(window.location.href)));
   const data = await getCachedData(key).catch(() => null);
-  let headers;
-  if (!data) {
-    headers = await getHeaders().catch(() => ({}));
-  }
 
   if (browser.runtime?.id) return; // Prevent CSP issues in the browser console
 
@@ -58,7 +54,7 @@ export const analyze = async () => {
     }
   };
 
-  const context = { originalHtml: html, html, scripts, page, headers };
+  const context = { originalHtml: html, html, scripts, page, headers: {} };
   const usesVue = await hasVue(context);
   if (!usesVue) {
     return callDisable(); // No Vue detected, exit early
@@ -72,6 +68,14 @@ export const analyze = async () => {
     vueTrackerConsole.info("Vue version not found, analysis cannot continue.");
     return callDisable(); // Vue version not found, exit early
   }
+  const headers = await fetch(window.location.href, { method: "HEAD" }).then(res => {
+    const headers: Record<string, string> = {};
+    res.headers.forEach((value, key) => {
+      headers[key] = value;
+    });
+    return headers;
+  });
+  context.headers = headers;
   const plugins = (await getPlugins(context))?.sort((a, b) => a.name.localeCompare(b.name)) as VueTrackerTechnology[];
   const ui = await getUI(context) as VueTrackerTechnology;
   const { ssr } = await getVueMeta(context);

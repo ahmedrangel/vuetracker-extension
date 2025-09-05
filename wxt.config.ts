@@ -10,7 +10,7 @@ export default defineConfig({
     name: pkg.title,
     description: pkg.description,
     version: pkg.version,
-    permissions: ["activeTab", "scripting", "storage", "webRequest"],
+    permissions: ["activeTab", "scripting", "storage"],
     host_permissions: ["<all_urls>"],
     action: {},
     content_security_policy: {
