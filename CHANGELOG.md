@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v0.1.18
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.17...v0.1.18)
+
+### 🚀 Enhancements
+
+- Add server info + support headers analyzer ([6080433](https://github.com/ahmedrangel/vuetracker-extension/commit/6080433))
+
+### 🏡 Chore
+
+- **release:** V0.1.17 ([db763e2](https://github.com/ahmedrangel/vuetracker-extension/commit/db763e2))
+- Adjust auto icons deprecated config ([d0c873a](https://github.com/ahmedrangel/vuetracker-extension/commit/d0c873a))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.17
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.16...v0.1.17)
