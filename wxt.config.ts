@@ -34,7 +34,7 @@ export default defineConfig({
     startUrls: ["https://wxt.dev/"]
   },
   autoIcons: {
-    grayscaleOnDevelopment: false
+    developmentIndicator: false
   },
   vite: () => ({
     plugins: [
