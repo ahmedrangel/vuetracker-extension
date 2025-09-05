@@ -1,10 +1,10 @@
 import { parseURL } from "ufo";
-import { frameworks, modules, plugins, uis } from "./technologies";
+import { frameworks, modules, plugins, servers, uis } from "./technologies";
 
-export const getTechnologyMetas = (type: "framework" | "module" | "plugin" | "ui", slug?: string) => {
+export const getTechnologyMetas = (type: "framework" | "module" | "plugin" | "ui" | "server", slug?: string) => {
   if (!slug) return undefined;
-  const technology = [frameworks, modules, plugins, uis];
-  const types = ["framework", "module", "plugin", "ui"] as const;
+  const technology = [frameworks, modules, plugins, uis, servers];
+  const types = ["framework", "module", "plugin", "ui", "server"] as const;
   const index = types.indexOf(type);
   const technologyType = technology[index];
   if (!technologyType) return undefined;
@@ -93,6 +93,18 @@ export const getCachedData = (key?: string): Promise<VueTrackerResponse | null> 
       if (event.data.type === "getCachedDataContentResponse" && event.data.key === key) {
         if (event.data.data) resolve(event.data.data);
         else resolve(null);
+      }
+    });
+  });
+};
+
+export const getHeaders = async (): Promise<Record<string, string>> => {
+  window.postMessage({ type: "get-headers" }, { targetOrigin: "*" });
+  return new Promise((resolve) => {
+    window.addEventListener("message", (event) => {
+      if (event.data.type === "getHeadersContentResponse") {
+        if (event.data.headers) resolve(event.data.headers);
+        else resolve({});
       }
     });
   });

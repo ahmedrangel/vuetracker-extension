@@ -6,6 +6,9 @@ export default defineContentScript({
         if (response?.type === "getCachedDataResponse") {
           window.postMessage({ type: "getCachedDataContentResponse", data: response.data, key: response.key }, { targetOrigin: "*" });
         }
+        if (response?.type === "getHeadersResponse") {
+          window.postMessage({ type: "getHeadersContentResponse", headers: response.headers }, { targetOrigin: "*" });
+        }
       }).catch(() => null);
     });
   }

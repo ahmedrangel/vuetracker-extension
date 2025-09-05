@@ -52,6 +52,22 @@ export default defineBackground(() => {
     else if (message.type === "disable") {
       disableTab(tabId).catch(console.info);
     }
+    else if (message.type === "get-headers") {
+      sendResponse({ type: "getHeadersResponse", headers: headersGlobal });
+    }
     return true; // Keep the message channel open for sendResponse
   });
+
+  let headersGlobal: Record<string, string> = {};
+
+  browser.webRequest.onCompleted.addListener((details) => {
+    // Aquí tienes los headers de la respuesta
+    headersGlobal = (details.responseHeaders ?? []).reduce((acc, header) => {
+      if (header.name && header.value) acc[header.name.toLowerCase()] = header.value;
+      return acc;
+    }, {} as Record<string, string>);
+  },
+  { urls: ["<all_urls>"], types: ["main_frame"] },
+  ["responseHeaders"]
+  );
 });

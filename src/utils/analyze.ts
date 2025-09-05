@@ -1,12 +1,16 @@
 
 import { parseURL } from "ufo";
-import { getFramework, getNuxtMeta, getNuxtModules, getPlugins, getUI, getVueMeta, hasVue } from "vuetracker-analyzer/tools";
+import { getFramework, getNuxtMeta, getNuxtModules, getPlugins, getServer, getUI, getVueMeta, hasVue } from "vuetracker-analyzer/tools";
 import { useSandbox } from "./sandbox";
 import { vueTrackerConsole } from "./console";
 
 export const analyze = async () => {
   const key = normalizeKey(normalizeSITE(String(window.location.href)));
   const data = await getCachedData(key).catch(() => null);
+  let headers;
+  if (!data) {
+    headers = await getHeaders().catch(() => ({}));
+  }
 
   if (browser.runtime?.id) return; // Prevent CSP issues in the browser console
 
@@ -54,7 +58,7 @@ export const analyze = async () => {
     }
   };
 
-  const context = { originalHtml: html, html, scripts, page };
+  const context = { originalHtml: html, html, scripts, page, headers };
   const usesVue = await hasVue(context);
   if (!usesVue) {
     return callDisable(); // No Vue detected, exit early
@@ -72,6 +76,8 @@ export const analyze = async () => {
   const ui = await getUI(context) as VueTrackerTechnology;
   const { ssr } = await getVueMeta(context);
 
+  const server = await getServer(context) as VueTrackerTechnology;
+
   const infos: VueTrackerResponse = {
     url,
     hostname: hostname,
@@ -82,7 +88,8 @@ export const analyze = async () => {
     framework: null, // nuxt | gridsome | quasar | vuepress | iles
     frameworkModules: [],
     plugins, // vue-router, vuex, vue-apollo, etc
-    ui // vuetify | bootstrap-vue | element-ui | tailwindcss
+    ui, // vuetify | bootstrap-vue | element-ui | tailwindcss
+    server
   };
 
   const framework = await getFramework(context);

@@ -13,37 +13,46 @@ const key = normalizeKey(normalizeSITE(location));
 const { state: data } = useStoredValue<VueTrackerResponse>(`session:analyzed:${key}`);
 const framework = computed(() => data.value?.framework);
 const ui = computed(() => data.value?.ui);
+const server = computed(() => data.value?.server);
 const sitePlugins = computed(() => data.value?.plugins);
 const siteModules = computed(() => data.value?.frameworkModules);
 const siteInfo = computed<{ title: string, value?: string, icon?: string | null, url?: string }[]>(() => {
   if (!data.value) return [];
-  return [{
-    title: "Vue Version",
-    value: data.value?.vueVersion,
-    icon: vue.icon,
-    url: vue.url
-  },
-  {
-    title: framework.value?.version ? framework.value.name : "Framework",
-    value: framework.value?.version ? framework.value.version : framework.value?.name,
-    icon: getTechnologyMetas("framework", framework.value?.slug)?.icon,
-    url: getTechnologyMetas("framework", framework.value?.slug)?.url
+  return [
+    {
+      title: "Vue Version",
+      value: data.value?.vueVersion,
+      icon: vue.icon,
+      url: vue.url
+    },
+    {
+      title: framework.value?.version ? framework.value.name : "Framework",
+      value: framework.value?.version ? framework.value.version : framework.value?.name,
+      icon: getTechnologyMetas("framework", framework.value?.slug)?.icon,
+      url: getTechnologyMetas("framework", framework.value?.slug)?.url
 
-  },
-  {
-    title: "UI Framework",
-    value: ui.value?.name,
-    icon: getTechnologyMetas("ui", ui.value?.slug)?.icon,
-    url: getTechnologyMetas("ui", ui.value?.slug)?.url
-  },
-  {
-    title: "Rendering",
-    value: data.value.hasSSR ? "Universal" : "Client-side"
-  },
-  {
-    title: "Deployment",
-    value: data.value.isStatic ? "Static" : data.value.hasSSR && !data.value.isStatic && data.value.isStatic != undefined ? "Server" : undefined
-  }];
+    },
+    {
+      title: "UI Framework",
+      value: ui.value?.name,
+      icon: getTechnologyMetas("ui", ui.value?.slug)?.icon,
+      url: getTechnologyMetas("ui", ui.value?.slug)?.url
+    },
+    {
+      title: "Rendering",
+      value: data.value.hasSSR ? "Universal" : "Client-side"
+    },
+    {
+      title: "Deployment",
+      value: data.value.isStatic ? "Static" : data.value.hasSSR && !data.value.isStatic && data.value.isStatic != undefined ? "Server" : undefined
+    },
+    {
+      title: "Server",
+      value: server.value?.name,
+      icon: getTechnologyMetas("server", server.value?.slug)?.icon,
+      url: getTechnologyMetas("server", server.value?.slug)?.url
+    }
+  ];
 });
 </script>
 
