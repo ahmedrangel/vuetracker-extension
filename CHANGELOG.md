@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.19
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.18...v0.1.19)
+
+### 🚀 Enhancements
+
+- Remove webRequest method and use fetch with method HEAD to get headers (should find a better way) ([61be63f](https://github.com/ahmedrangel/vuetracker-extension/commit/61be63f))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.18
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.17...v0.1.18)
