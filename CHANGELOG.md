@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.23
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.22...v0.1.23)
+
+### 🏡 Chore
+
+- Use config dir ([27efa31](https://github.com/ahmedrangel/vuetracker-extension/commit/27efa31))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.22
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.21...v0.1.22)
