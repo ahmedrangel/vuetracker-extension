@@ -21,13 +21,13 @@
     "@tailwindcss/vite": "^4.1.14",
     "tailwindcss": "^4.1.14",
     "vue": "^3.5.22",
-    "vuetracker-analyzer": "^0.3.17"
+    "vuetracker-analyzer": "^0.3.18"
   },
   "devDependencies": {
     "@eslint/compat": "^1.4.0",
     "@nyariv/sandboxjs": "^0.8.25",
     "@stylistic/eslint-plugin": "^5.4.0",
-    "@types/chrome": "^0.1.18",
+    "@types/chrome": "^0.1.22",
     "@types/fs-extra": "^11.0.4",
     "@typescript-eslint/eslint-plugin": "^8.45.0",
     "@vue/eslint-config-typescript": "^14.6.0",
@@ -35,7 +35,7 @@
     "@wxt-dev/auto-icons": "^1.1.0",
     "@wxt-dev/module-vue": "^1.0.3",
     "changelogen": "^0.6.2",
-    "eslint": "^9.36.0",
+    "eslint": "^9.37.0",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-vue": "^10.5.0",
@@ -47,5 +47,5 @@
     "vue-tsc": "^3.1.0",
     "wxt": "^0.20.11"
   },
-  "packageManager": "pnpm@10.17.1"
+  "packageManager": "pnpm@10.18.0"
 }
