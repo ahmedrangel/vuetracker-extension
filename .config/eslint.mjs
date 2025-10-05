@@ -17,6 +17,13 @@ export default defineConfigWithVueTs([
       "import": importPlugin,
       "vue": pluginVue
     },
+    languageOptions: {
+      parserOptions: {
+        projectService: {
+          allowDefaultProject: [".config/wxt.ts", ".config/eslint.mjs"]
+        }
+      }
+    },
     rules: {
       ...pluginVue.configs.base.rules,
       ...pluginVue.configs["flat/recommended"].map(c => c.rules).reduce((acc, c) => ({ ...acc, ...c }), {}),

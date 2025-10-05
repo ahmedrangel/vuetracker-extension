@@ -6,7 +6,7 @@
   "version": "0.1.22",
   "type": "module",
   "scripts": {
-    "dev": "wxt",
+    "dev": "wxt --config .config/wxt.ts",
     "dev:firefox": "wxt -b firefox",
     "build": "wxt build",
     "build:firefox": "wxt build -b firefox",
@@ -14,7 +14,7 @@
     "zip:firefox": "wxt zip -b firefox",
     "compile": "vue-tsc --noEmit",
     "postinstall": "wxt prepare",
-    "lint": "eslint ."
+    "lint": "eslint . --config .config/eslint.mjs"
   },
   "dependencies": {
     "@iconify/vue": "^5.0.0",
