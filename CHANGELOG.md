@@ -1,6 +1,10 @@
 # Changelog
 
 
+## v0.1.24
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.23...v0.1.24)
+
 ## v0.1.23
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.22...v0.1.23)
