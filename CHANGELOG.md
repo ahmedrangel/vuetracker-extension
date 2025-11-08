@@ -1,6 +1,26 @@
 # Changelog
 
 
+## v0.2.0
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.24...v0.2.0)
+
+### 🩹 Fixes
+
+- Prevent concurrent analyze runs with flag ([8d00f5f](https://github.com/ahmedrangel/vuetracker-extension/commit/8d00f5f))
+
+### 💅 Refactors
+
+- ⚠️  Drop storing metadata, get live page metadata instead on popup mount ([1ce9afb](https://github.com/ahmedrangel/vuetracker-extension/commit/1ce9afb))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  Drop storing metadata, get live page metadata instead on popup mount ([1ce9afb](https://github.com/ahmedrangel/vuetracker-extension/commit/1ce9afb))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.24
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.23...v0.1.24)
