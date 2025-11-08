@@ -8,16 +8,6 @@ declare global {
   interface VueTrackerResponse {
     hostname?: string;
     url: string;
-    meta: {
-      description?: string | null;
-      icons?: VueTrackerSiteIcons[];
-      isAdultContent: boolean;
-      language?: string;
-      siteName?: string | null;
-      title?: string;
-      ogImage?: string | null;
-      icons: VueTrackerSiteIcons[];
-    };
     framework: VueTrackerTechnology | null;
     frameworkModules: VueTrackerTechnology[];
     plugins: VueTrackerTechnology[];
@@ -45,6 +35,7 @@ declare global {
     trustedTypes: {
       createPolicy: (name: string, rules: { [x: string]: (input: string) => string }) => { [x: string]: (input: string) => string };
     };
+    __vuetracker_analyzing__?: boolean;
   }
 }
 

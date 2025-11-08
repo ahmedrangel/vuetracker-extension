@@ -16,29 +16,6 @@ export const analyze = async () => {
 
   setAnalyzingFlag(true);
 
-  const icons = Array.from(document.querySelectorAll("head > link[rel=\"icon\"], head > link[rel=\"shortcut icon\"]"))
-    .map(element => ({
-      sizes: (element as HTMLLinkElement).sizes?.value || null,
-      url: (element as HTMLLinkElement).href
-    }))
-    .sort((a, b) => {
-      const aSize = Number(a.sizes?.split("x")[0]) || 0;
-      const bSize = Number(b.sizes?.split("x")[0]) || 0;
-      return bSize - aSize;
-    });
-  const rtaLabel = (document.querySelector("head > meta[name=\"rating\"]") as HTMLMetaElement)?.content;
-  const meta = {
-    description: (document.querySelector("head > meta[property=\"description\"], head > meta[name=\"description\"]") as HTMLMetaElement)?.content,
-    icons, // { url, sizes }
-    isAdultContent: rtaLabel && ["adult", "RTA-5042-1996-1400-1577-RTA"].includes(rtaLabel?.trim()) ? true : false,
-    language: window.navigator.language,
-    ogImage: (document.querySelector("head > meta:is([property=\"og:image\"], [name=\"og:image\"])") as HTMLMetaElement)?.content,
-    siteName: (document.querySelector("head > meta[property=\"og:site_name\"], head > meta[name=\"og:site_name\"]") as HTMLMetaElement)?.content,
-    title: document.title
-  };
-
-  if (data?.meta && JSON.stringify(meta) !== JSON.stringify(data?.meta)) data.meta = meta; // Update meta if it has changed
-
   if (data) {
     setAnalyzingFlag(false);
     return callAnalyze(data); // Cached data found, return it
@@ -96,7 +73,6 @@ export const analyze = async () => {
   const infos: VueTrackerResponse = {
     url,
     hostname: hostname,
-    meta,
     vueVersion,
     hasSSR: ssr, // default
     isStatic: undefined, // default

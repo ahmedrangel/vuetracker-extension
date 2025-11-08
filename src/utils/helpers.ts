@@ -12,7 +12,7 @@ export const getTechnologyMetas = (type: "framework" | "module" | "plugin" | "ui
   return map[slug]?.metas || undefined;
 };
 
-export const findFavicon = (icons?: VueTrackerResponse["meta"]["icons"]) => {
+export const findFavicon = (icons?: { sizes: string | null, url: string }[]) => {
   if (!icons?.length) return null;
   const favicon = icons.find(el => el.url.includes("/favicon.ico")) || icons[0];
   return favicon?.url;

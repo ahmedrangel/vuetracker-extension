@@ -1,27 +1,45 @@
 <script lang="ts" setup>
 import { Icon } from "@iconify/vue";
+import { parseURL } from "ufo";
 import TrackerDetails from "./TrackerDetails.vue";
-import useStoredValue from "@/composables/useStoredValue";
 
 const tabId = await getCurrentTabId();
 const scripting = await browser.scripting.executeScript({
   target: { tabId: tabId! },
-  func: () => window.location.href
+  func: () => ({
+    url: window.location.href,
+    description: (document.querySelector("head > meta[property=\"description\"], head > meta[name=\"description\"]") as HTMLMetaElement)?.content,
+    icons: Array.from(document.querySelectorAll("head > link[rel=\"icon\"], head > link[rel=\"shortcut icon\"]"))
+      .map(element => ({
+        sizes: (element as HTMLLinkElement).sizes?.value || null,
+        url: (element as HTMLLinkElement).href
+      }))
+      .sort((a, b) => {
+        const aSize = Number(a.sizes?.split("x")[0]) || 0;
+        const bSize = Number(b.sizes?.split("x")[0]) || 0;
+        return bSize - aSize;
+      }),
+    ogImage: (document.querySelector("head > meta:is([property=\"og:image\"], [name=\"og:image\"])") as HTMLMetaElement)?.content,
+    title: document.title
+  })
 });
-const location = scripting?.[0]?.result as string;
-const key = normalizeKey(normalizeSITE(location));
-const { state: data } = useStoredValue<VueTrackerResponse>(`session:analyzed:${key}`);
-const framework = computed(() => data.value?.framework);
-const ui = computed(() => data.value?.ui);
-const server = computed(() => data.value?.server);
-const sitePlugins = computed(() => data.value?.plugins);
-const siteModules = computed(() => data.value?.frameworkModules);
+
+const { url, title, description, icons, ogImage } = scripting?.[0]?.result || {};
+const parsedURL = parseURL(url);
+const hostname = parsedURL.host;
+const key = normalizeKey(normalizeSITE(url));
+const data = await storage.getItem<VueTrackerResponse>(`session:analyzed:${key}`);
+const framework = computed(() => data?.framework);
+const ui = computed(() => data?.ui);
+const server = computed(() => data?.server);
+const sitePlugins = computed(() => data?.plugins);
+const siteModules = computed(() => data?.frameworkModules);
 const siteInfo = computed<{ title: string, value?: string, icon?: string | null, url?: string }[]>(() => {
-  if (!data.value) return [];
+  if (!data) return [];
   return [
     {
       title: "Vue Version",
-      value: data.value?.vueVersion,
+      value: data?.vueVersion,
       icon: vue.icon,
       url: vue.url
     },
@@ -40,11 +58,11 @@ const siteInfo = computed<{ title: string, value?: string, icon?: string | null,
     },
     {
       title: "Rendering",
-      value: data.value.hasSSR ? "Universal" : "Client-side"
+      value: data?.hasSSR ? "Universal" : "Client-side"
     },
     {
       title: "Deployment",
-      value: data.value.isStatic ? "Static" : data.value.hasSSR && !data.value.isStatic && data.value.isStatic != undefined ? "Server" : undefined
+      value: data?.isStatic ? "Static" : data?.hasSSR && !data?.isStatic && data?.isStatic != undefined ? "Server" : undefined
     },
     {
       title: "Server",
@@ -67,18 +85,18 @@ const siteInfo = computed<{ title: string, value?: string, icon?: string | null,
       <div class="flex flex-col gap-2 mb-3">
         <div class="flex gap-2 items-center justify-between">
           <div class="flex flex-col gap-0.5 text-start overflow-hidden">
-            <a target="_blank" :href="data.url" class="hover:underline">
+            <a target="_blank" :href="url" class="hover:underline">
               <div class="flex gap-2 items-center justify-start">
-                <img v-if="data?.meta?.icons" :src="findFavicon(data.meta.icons) || `https://${data.hostname}/favicon.ico`" class="min-w-6 max-w-6 min-h-6 max-h-6">
-                <p class="text-base font-semibold truncate">{{ normalizeSITE(data.url) }}</p>
+                <img v-if="icons" :src="findFavicon(icons) || `https://${hostname}/favicon.ico`" class="min-w-6 max-w-6 min-h-6 max-h-6">
+                <p class="text-base font-semibold truncate">{{ normalizeSITE(url) }}</p>
               </div>
             </a>
-            <h4 class="text-sm font-semibold">{{ data.meta.title }}</h4>
+            <h4 class="text-sm font-semibold">{{ title }}</h4>
             <div class="text-left flex flex-col gap-1">
-              <p v-if="data?.meta?.description" class="text-xs text-start">{{ data.meta.description }}</p>
+              <p v-if="description" class="text-xs text-start">{{ description }}</p>
             </div>
           </div>
-          <img v-if="data.meta.ogImage" :src="fixOgImage(data.hostname, data.meta.ogImage)" class="rounded-xl w-auto h-[60px] border-2 border-neutral-300 " :title="data.meta.title || normalizeSITE(data.url)" :alt="data.meta.title || normalizeSITE(data.url)">
+          <img v-if="ogImage" :src="fixOgImage(hostname, ogImage)" class="rounded-xl w-auto h-[60px] border-2 border-neutral-300 " :title="title || normalizeSITE(url)" :alt="title || normalizeSITE(url)">
         </div>
       </div>
       <TrackerDetails :site-info="siteInfo" :site-plugins="sitePlugins" :site-modules="siteModules" />
