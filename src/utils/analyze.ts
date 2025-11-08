@@ -4,11 +4,17 @@ import { getFramework, getNuxtMeta, getNuxtModules, getPlugins, getServer, getUI
 import { useSandbox } from "./sandbox";
 import { vueTrackerConsole } from "./console";
 
+const setAnalyzingFlag = (value: boolean) => window.__vuetracker_analyzing__ = value;
+
 export const analyze = async () => {
   const key = normalizeKey(normalizeSITE(String(window.location.href)));
   const data = await getCachedData(key).catch(() => null);
 
   if (browser.runtime?.id) return; // Prevent CSP issues in the browser console
+
+  if (window.__vuetracker_analyzing__) return; // Prevent multiple analysis runs
+
+  setAnalyzingFlag(true);
 
   const icons = Array.from(document.querySelectorAll("head > link[rel=\"icon\"], head > link[rel=\"shortcut icon\"]"))
     .map(element => ({
@@ -33,7 +39,10 @@ export const analyze = async () => {
 
   if (data?.meta && JSON.stringify(meta) !== JSON.stringify(data?.meta)) data.meta = meta; // Update meta if it has changed
 
-  if (data) return callAnalyze(data); // Cached data found, return it
+  if (data) {
+    setAnalyzingFlag(false);
+    return callAnalyze(data); // Cached data found, return it
+  }
 
   const html = document.documentElement.outerHTML;
   const scripts = Array.from(document.getElementsByTagName("script")).map(({ src }) => src).filter(script => script);
@@ -57,6 +66,7 @@ export const analyze = async () => {
   const context = { originalHtml: html, html, scripts, page, headers: {} };
   const usesVue = await hasVue(context);
   if (!usesVue) {
+    setAnalyzingFlag(false);
     return callDisable(); // No Vue detected, exit early
   }
   vueTrackerConsole.info("Vue detected, starting analysis...");
@@ -66,6 +76,7 @@ export const analyze = async () => {
   const vueVersion = window.$nuxt?.$root?.constructor?.version || window.Vue?.version || [...document.querySelectorAll("*")].map((el) => el.__vue__?.$root?.constructor?.version || el?.__vue__?.$root?.$options?._base?.version || el.__vue_app__?.version).filter(Boolean)[0];
   if (!vueVersion) {
     vueTrackerConsole.info("Vue version not found, analysis cannot continue.");
+    setAnalyzingFlag(false);
     return callDisable(); // Vue version not found, exit early
   }
   const headers = await fetch(window.location.href, { method: "HEAD" }).then(res => {
@@ -119,5 +130,6 @@ export const analyze = async () => {
     }
   }
   infos.framework = framework;
+  setAnalyzingFlag(false);
   return callAnalyze(infos);
 };
