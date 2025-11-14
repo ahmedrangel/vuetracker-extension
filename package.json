@@ -24,7 +24,7 @@
     "vuetracker-analyzer": "^0.3.19"
   },
   "devDependencies": {
-    "@eslint/compat": "^1.4.1",
+    "@eslint/compat": "^2.0.0",
     "@nyariv/sandboxjs": "^0.8.25",
     "@stylistic/eslint-plugin": "^5.5.0",
     "@types/chrome": "^0.1.28",
