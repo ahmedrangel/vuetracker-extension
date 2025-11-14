@@ -34,7 +34,7 @@ importers:
         specifier: ^5.5.0
         version: 5.5.0(eslint@9.39.1(jiti@2.6.1))
       '@types/chrome':
-        specifier: ^0.1.28
+        specifier: ^0.1.29
         version: 0.1.29
       '@types/fs-extra':
         specifier: ^11.0.4
