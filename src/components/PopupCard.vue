@@ -4,42 +4,19 @@ import { parseURL } from "ufo";
 import TrackerDetails from "./TrackerDetails.vue";
 
 const tabId = await getCurrentTabId();
-const scripting = await browser.scripting.executeScript({
-  target: { tabId: tabId! },
-  func: () => ({
-    url: window.location.href,
-    description: (document.querySelector("head > meta[property=\"description\"], head > meta[name=\"description\"]") as HTMLMetaElement)?.content,
-    icons: Array.from(document.querySelectorAll("head > link[rel=\"icon\"], head > link[rel=\"shortcut icon\"]"))
-      .map(element => ({
-        sizes: (element as HTMLLinkElement).sizes?.value || null,
-        url: (element as HTMLLinkElement).href
-      }))
-      .sort((a, b) => {
-        const aSize = Number(a.sizes?.split("x")[0]) || 0;
-        const bSize = Number(b.sizes?.split("x")[0]) || 0;
-        return bSize - aSize;
-      }),
-    ogImage: (document.querySelector("head > meta:is([property=\"og:image\"], [name=\"og:image\"])") as HTMLMetaElement)?.content,
-    title: document.title
-  })
-});
-
-const { url, title, description, icons, ogImage } = scripting?.[0]?.result || {};
-const parsedURL = parseURL(url);
-const hostname = parsedURL.host;
-const key = normalizeKey(normalizeSITE(url));
-const data = await storage.getItem<VueTrackerResponse>(`session:analyzed:${key}`);
-const framework = computed(() => data?.framework);
-const ui = computed(() => data?.ui);
-const server = computed(() => data?.server);
-const sitePlugins = computed(() => data?.plugins);
-const siteModules = computed(() => data?.frameworkModules);
+const loading = ref(true);
+const data = ref<VueTrackerResponse>();
+const framework = computed(() => data.value?.framework);
+const ui = computed(() => data.value?.ui);
+const server = computed(() => data.value?.server);
+const sitePlugins = computed(() => data.value?.plugins);
+const siteModules = computed(() => data.value?.frameworkModules);
 const siteInfo = computed<{ title: string, value?: string, icon?: string | null, url?: string }[]>(() => {
-  if (!data) return [];
+  if (!data.value) return [];
   return [
     {
       title: "Vue Version",
-      value: data?.vueVersion,
+      value: data.value?.vueVersion,
       icon: vue.icon,
       url: vue.url
     },
@@ -58,11 +35,11 @@ const siteInfo = computed<{ title: string, value?: string, icon?: string | null,
     },
     {
       title: "Rendering",
-      value: data?.hasSSR ? "Universal" : "Client-side"
+      value: data.value?.hasSSR ? "Universal" : "Client-side"
     },
     {
       title: "Deployment",
-      value: data?.isStatic ? "Static" : data?.hasSSR && !data?.isStatic && data?.isStatic != undefined ? "Server" : undefined
+      value: data.value?.isStatic ? "Static" : data.value?.hasSSR && !data.value?.isStatic && data.value?.isStatic != undefined ? "Server" : undefined
     },
     {
       title: "Server",
@@ -71,6 +48,42 @@ const siteInfo = computed<{ title: string, value?: string, icon?: string | null,
       url: getTechnologyMetas("server", server.value?.slug)?.url
     }
   ];
+});
+
+const scripting = await browser.scripting.executeScript({
+  target: { tabId: tabId! },
+  func: () => {
+    return {
+      url: window.location.href,
+      description: (document.querySelector("head > meta[property=\"description\"], head > meta[name=\"description\"]") as HTMLMetaElement)?.content,
+      icons: Array.from(document.querySelectorAll("head > link[rel=\"icon\"], head > link[rel=\"shortcut icon\"]"))
+        .map(element => ({
+          sizes: (element as HTMLLinkElement).sizes?.value || null,
+          url: (element as HTMLLinkElement).href
+        }))
+        .sort((a, b) => {
+          const aSize = Number(a.sizes?.split("x")[0]) || 0;
+          const bSize = Number(b.sizes?.split("x")[0]) || 0;
+          return bSize - aSize;
+        }),
+      ogImage: (document.querySelector("head > meta:is([property=\"og:image\"], [name=\"og:image\"])") as HTMLMetaElement)?.content,
+      title: document.title
+    };
+  }
+});
+const { url, title, description, icons, ogImage } = scripting?.[0]?.result || {};
+const parsedURL = parseURL(url);
+const hostname = parsedURL.host;
+
+onMounted(async () => {
+  const analyzeScript = await browser.scripting.executeScript({
+    target: { tabId: tabId! },
+    world: "MAIN",
+    injectImmediately: true,
+    files: ["content-scripts/analyze.js"]
+  }).catch(() => null);
+  data.value = analyzeScript?.[0]?.result as VueTrackerResponse | undefined;
+  loading.value = false;
 });
 </script>
 
@@ -81,7 +94,13 @@ const siteInfo = computed<{ title: string, value?: string, icon?: string | null,
         <span class="text-green-600 dark:text-primary-400">Vue</span>Tracker
       </a>
     </div>
-    <div v-if="data">
+    <div v-if="loading">
+      <div class="flex justify-center items-center h-32 gap-2">
+        <Icon icon="eos-icons:loading" class="text-green-600" height="32" />
+        <span class="text-lg font-semibold">Loading...</span>
+      </div>
+    </div>
+    <div v-else-if="!loading && data">
       <div class="flex flex-col gap-2 mb-3">
         <div class="flex gap-2 items-center justify-between">
           <div class="flex flex-col gap-0.5 text-start overflow-hidden">
@@ -101,11 +120,9 @@ const siteInfo = computed<{ title: string, value?: string, icon?: string | null,
       </div>
       <TrackerDetails :site-info="siteInfo" :site-plugins="sitePlugins" :site-modules="siteModules" />
     </div>
-    <div v-else>
-      <div class="flex justify-center items-center h-32 gap-2">
-        <Icon icon="eos-icons:loading" class="text-green-600" height="32" />
-        <span class="text-lg font-semibold">Loading...</span>
-      </div>
+    <div v-else class="flex justify-center items-center h-32 gap-2">
+      <Icon icon="mdi:alert-circle-outline" class="text-red-600" height="32" />
+      <span class="text-lg font-semibold">An error occurred while detecting Vue.js on this site.</span>
     </div>
   </div>
 </template>

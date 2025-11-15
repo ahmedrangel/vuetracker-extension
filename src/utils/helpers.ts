@@ -1,5 +1,4 @@
 import { parseURL } from "ufo";
-import { frameworks, modules, plugins, servers, uis } from "./technologies";
 
 export const getTechnologyMetas = (type: "framework" | "module" | "plugin" | "ui" | "server", slug?: string) => {
   if (!slug) return undefined;
@@ -69,23 +68,9 @@ export const executeAnalyzer = async (tabId?: number) => {
 
 export const callDisable = () => window.postMessage({ type: "disable", data: null }, { targetOrigin: "*" });
 
-export const callAnalyze = (data: VueTrackerResponse) => window.postMessage({ type: "analyze", data }, { targetOrigin: "*" });
+export const callAnalyzeVue = (data: { url: string, vue: boolean }) => window.postMessage({ type: "analyze-vue", data }, { targetOrigin: "*" });
 
-export const trustedEval = (value: string) => {
-  const trustedScript = window.trustedTypes.createPolicy("vuetracker-policy", { createScript: (x: string) => x });
-  return window.eval(trustedScript.createScript(value));
-};
-export const isTrustedEval = () => {
-  try {
-    trustedEval("1 + 1");
-    return true;
-  }
-  catch {
-    return false;
-  }
-};
-
-export const getCachedData = (key?: string): Promise<VueTrackerResponse | null> => {
+export const getCachedData = <T>(key?: string): Promise<T | null> => {
   window.postMessage({ type: "getCachedData", key }, { targetOrigin: "*" });
   return new Promise((resolve) => {
     if (!key) return resolve(null);

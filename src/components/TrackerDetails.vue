@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
-import { getTechnologyMetas } from "@/utils/helpers";
 import TechCard from "@/components/TechCard.vue";
 import TechCardBasic from "@/components/TechCardBasic.vue";
 

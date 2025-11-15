@@ -31,20 +31,28 @@ export default defineBackground(() => {
       }).catch(() => null);
     }
     if (message.type === "analyze") {
-      Promise.allSettled([
-        browser.action.setPopup({ popup: "popup-ext.html" }),
-        browser.action.enable(tabId),
-        browser.action.setIcon({ path: { 16: "icons/16.png", 32: "icons/32.png", 48: "icons/48.png", 128: "icons/128.png" } })
-      ]).catch(console.info);
       const key = normalizeKey(normalizeSITE(message.data.url));
       storage.getItem(`session:analyzed:${key}`).then((data) => {
-        if (message.data.vueVersion && !data) {
+        if (message.data?.vueVersion && !data) {
           const decoratedText = vueTrackerConsole.info("Analysis completed.", message.data);
           browser.scripting.executeScript({
             target: { tabId: tabId! },
             args: [decoratedText],
             func: (text) => console.info(...text)
           }).catch(console.info);
+          storage.setItem(`session:analyzed:${key}`, message.data).catch(console.info);
+        }
+      }).catch(console.info);
+    }
+    else if (message.type === "analyze-vue") {
+      Promise.allSettled([
+        browser.action.setPopup({ popup: "popup-ext.html" }),
+        browser.action.enable(tabId),
+        browser.action.setIcon({ path: { 16: "icons/16.png", 32: "icons/32.png", 48: "icons/48.png", 128: "icons/128.png" } })
+      ]).catch(console.info);
+      const key = "vue__" + normalizeKey(normalizeSITE(message.data.url));
+      storage.getItem(`session:analyzed:${key}`).then((data) => {
+        if (message.data && !data) {
           storage.setItem(`session:analyzed:${key}`, message.data).catch(console.info);
         }
       }).catch(console.info);
