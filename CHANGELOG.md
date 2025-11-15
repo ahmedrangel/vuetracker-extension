@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.3.0
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.2.0...v0.3.0)
+
+### 💅 Refactors
+
+- ⚠️  Detect only vue in background but analyze technologies when popup is mounted + improve logic + remove some auto imported imports ([97a8acf](https://github.com/ahmedrangel/vuetracker-extension/commit/97a8acf))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  Detect only vue in background but analyze technologies when popup is mounted + improve logic + remove some auto imported imports ([97a8acf](https://github.com/ahmedrangel/vuetracker-extension/commit/97a8acf))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.2.0
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.1.24...v0.2.0)
