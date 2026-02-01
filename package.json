@@ -21,11 +21,11 @@
     "@tailwindcss/vite": "^4.1.18",
     "tailwindcss": "^4.1.18",
     "vue": "^3.5.27",
-    "vuetracker-analyzer": "^0.3.20"
+    "vuetracker-analyzer": "^0.3.21"
   },
   "devDependencies": {
     "@eslint/compat": "^2.0.2",
-    "@nyariv/sandboxjs": "^0.8.27",
+    "@nyariv/sandboxjs": "^0.8.28",
     "@stylistic/eslint-plugin": "^5.7.1",
     "@types/chrome": "^0.1.36",
     "@types/fs-extra": "^11.0.4",
