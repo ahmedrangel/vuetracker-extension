@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v0.3.2
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.3.1...v0.3.2)
+
+### 🏡 Chore
+
+- **eslint:** Add vue/no-duplicate-class-names rule ([1441182](https://github.com/ahmedrangel/vuetracker-extension/commit/1441182))
+- Update deps ([bbaa217](https://github.com/ahmedrangel/vuetracker-extension/commit/bbaa217))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.3.1
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.3.0...v0.3.1)
