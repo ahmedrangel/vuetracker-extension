@@ -34,7 +34,7 @@
     "@wxt-dev/auto-icons": "^1.1.0",
     "@wxt-dev/module-vue": "^1.0.3",
     "changelogen": "^0.6.2",
-    "eslint": "^9.39.2",
+    "eslint": "^10.0.0",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-vue": "^10.7.0",
