@@ -18,8 +18,8 @@
   },
   "dependencies": {
     "@iconify/vue": "^5.0.0",
-    "@tailwindcss/vite": "^4.1.18",
-    "tailwindcss": "^4.1.18",
+    "@tailwindcss/vite": "^4.2.0",
+    "tailwindcss": "^4.2.0",
     "vue": "^3.5.28",
     "vuetracker-analyzer": "^0.3.21"
   },
