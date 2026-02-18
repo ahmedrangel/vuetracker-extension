@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v0.3.4
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.3.3...v0.3.4)
+
+### 🩹 Fixes
+
+- Use tabId when setting action icon ([63ffa94](https://github.com/ahmedrangel/vuetracker-extension/commit/63ffa94))
+
+### 🏡 Chore
+
+- Adjust ([06dc771](https://github.com/ahmedrangel/vuetracker-extension/commit/06dc771))
+- **package:** Update lock ([b436a21](https://github.com/ahmedrangel/vuetracker-extension/commit/b436a21))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.3.3
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.3.2...v0.3.3)
