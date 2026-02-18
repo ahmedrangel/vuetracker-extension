@@ -48,7 +48,7 @@ export default defineBackground(() => {
       Promise.allSettled([
         browser.action.setPopup({ popup: "popup-ext.html" }),
         browser.action.enable(tabId),
-        browser.action.setIcon({ path: { 16: "icons/16.png", 32: "icons/32.png", 48: "icons/48.png", 128: "icons/128.png" } })
+        browser.action.setIcon({ path: { 16: "icons/16.png", 32: "icons/32.png", 48: "icons/48.png", 128: "icons/128.png" }, tabId })
       ]).catch(console.info);
       const key = "vue__" + normalizeKey(normalizeSITE(message.data.url));
       storage.getItem(`session:analyzed:${key}`).then((data) => {

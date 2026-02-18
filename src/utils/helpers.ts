@@ -50,7 +50,7 @@ export const disableTab = async (tabId?: number) => {
       return;
     }
     await browser.action.disable(tabId);
-    await browser.action.setIcon({ path: { 16: "icons/16-gray.png", 32: "icons/32-gray.png", 48: "icons/48-gray.png", 128: "icons/128-gray.png" } });
+    await browser.action.setIcon({ path: { 16: "icons/16-gray.png", 32: "icons/32-gray.png", 48: "icons/48-gray.png", 128: "icons/128-gray.png" }, tabId });
   }
   catch {}
 };
