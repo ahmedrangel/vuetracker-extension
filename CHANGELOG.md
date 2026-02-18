@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.3.3
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.3.2...v0.3.3)
+
+### 🩹 Fixes
+
+- Don't disable tab before executing analyzer ([7f54b82](https://github.com/ahmedrangel/vuetracker-extension/commit/7f54b82))
+
+### 🏡 Chore
+
+- **typescript:** Include .config dir ([7f8b57e](https://github.com/ahmedrangel/vuetracker-extension/commit/7f8b57e))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.3.2
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.3.1...v0.3.2)
