@@ -115,7 +115,7 @@ onMounted(async () => {
               <p v-if="description" class="text-xs text-start">{{ description }}</p>
             </div>
           </div>
-          <img v-if="ogImage" :src="fixOgImage(hostname, ogImage)" class="rounded-xl w-auto h-[60px] border-2 border-neutral-300 " :title="title || normalizeSITE(url)" :alt="title || normalizeSITE(url)">
+          <img v-if="ogImage" :src="fixOgImage(hostname, ogImage)" class="rounded-xl w-auto h-15 border-2 border-neutral-300 " :title="title || normalizeSITE(url)" :alt="title || normalizeSITE(url)">
         </div>
       </div>
       <TrackerDetails :site-info="siteInfo" :site-plugins="sitePlugins" :site-modules="siteModules" />
