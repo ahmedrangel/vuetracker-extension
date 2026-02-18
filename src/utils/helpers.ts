@@ -57,7 +57,6 @@ export const disableTab = async (tabId?: number) => {
 
 export const executeAnalyzer = async (tabId?: number) => {
   if (!tabId) return disableTab();
-  await disableTab(tabId);
   await browser.scripting.executeScript({
     target: { tabId },
     world: "MAIN",
