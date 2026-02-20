@@ -16,7 +16,7 @@ export default defineContentScript({
       const scripts = Array.from(document.getElementsByTagName("script")).map(({ src }) => src).filter(script => script);
       const page = { evaluate };
 
-      const context = { originalHtml: html, html, scripts, page, headers: {} };
+      const context = { originalHtml: html, html, scripts, page, headers: {} as Record<string, string> };
       const usesVue = await hasVue(context);
       if (!usesVue) {
         return; // No Vue detected, exit early
@@ -30,14 +30,12 @@ export default defineContentScript({
         vueTrackerConsole.info("Vue version not found, analysis cannot continue.");
         return;
       }
-      const headers = await fetch(window.location.href, { method: "HEAD" }).then(res => {
-        const headers: Record<string, string> = {};
-        res.headers.forEach((value, key) => {
-          headers[key] = value;
-        });
-        return headers;
-      });
-      context.headers = headers;
+      const headersLookup = await fetch(window.location.href, { method: "HEAD" }).catch(() => null);
+      if (headersLookup?.headers) {
+        for (const [key, value] of headersLookup.headers) {
+          context.headers[key] = value;
+        }
+      }
       const plugins = (await getPlugins(context))?.sort((a, b) => a.name.localeCompare(b.name)) as VueTrackerTechnology[];
       const ui = await getUI(context) as VueTrackerTechnology;
       const { ssr } = await getVueMeta(context);
