@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.3.5
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.3.4...v0.3.5)
+
+### 🩹 Fixes
+
+- Catch header fetch ([acd4040](https://github.com/ahmedrangel/vuetracker-extension/commit/acd4040))
+
+### 🏡 Chore
+
+- **release:** V0.3.4 ([2d4a09b](https://github.com/ahmedrangel/vuetracker-extension/commit/2d4a09b))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.3.4
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.3.3...v0.3.4)
