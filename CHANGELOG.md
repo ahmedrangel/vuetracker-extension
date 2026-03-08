@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v0.3.6
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.3.5...v0.3.6)
+
+### 🩹 Fixes
+
+- Use absolute paths for content scripts ([5d3d1f0](https://github.com/ahmedrangel/vuetracker-extension/commit/5d3d1f0))
+- Disable tab on startup ([41c3470](https://github.com/ahmedrangel/vuetracker-extension/commit/41c3470))
+
+### 🏡 Chore
+
+- **release:** V0.3.5 ([c32921a](https://github.com/ahmedrangel/vuetracker-extension/commit/c32921a))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.3.5
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.3.4...v0.3.5)
