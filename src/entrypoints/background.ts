@@ -1,6 +1,6 @@
 export default defineBackground(() => {
-  browser.action.enable().catch(console.info);
   browser.action.setPopup({ popup: "popup-ext.html" }).catch(console.info);
+  disableTab().catch(console.info);
 
   browser.runtime.onInstalled.addListener(() => {
     disableTab().catch(console.info);
