@@ -80,7 +80,7 @@ onMounted(async () => {
     target: { tabId: tabId! },
     world: "MAIN",
     injectImmediately: true,
-    files: ["content-scripts/analyze.js"]
+    files: ["/content-scripts/analyze.js"]
   }).catch(() => null);
   data.value = analyzeScript?.[0]?.result as VueTrackerResponse | undefined;
   loading.value = false;

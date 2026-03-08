@@ -61,7 +61,7 @@ export const executeAnalyzer = async (tabId?: number) => {
     target: { tabId },
     world: "MAIN",
     injectImmediately: true,
-    files: ["content-scripts/injected.js"]
+    files: ["/content-scripts/injected.js"]
   }).catch(() => null);
 };
 
