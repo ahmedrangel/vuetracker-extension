@@ -17,7 +17,7 @@ export const useSandbox = () => {
 
 const trustedEval = (value: string) => {
   const trustedScript = window.trustedTypes.createPolicy("vuetracker-policy", { createScript: (x: string) => x });
-  return window.eval(trustedScript.createScript(value));
+  return window.eval(trustedScript.createScript!(value));
 };
 
 const isTrustedEval = () => {
