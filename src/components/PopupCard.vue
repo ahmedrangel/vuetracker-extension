@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { Icon } from "@iconify/vue";
 import { parseURL } from "ufo";
 import TrackerDetails from "./TrackerDetails.vue";
