@@ -1,10 +1,10 @@
 import { resolve } from "node:path";
 import stylistic from "@stylistic/eslint-plugin";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
-import importPlugin from "eslint-plugin-import";
+import importPlugin from "eslint-plugin-import-x";
 import pluginVue from "eslint-plugin-vue";
 import { defineConfigWithVueTs, vueTsConfigs } from "@vue/eslint-config-typescript";
-import { includeIgnoreFile } from "@eslint/compat";
+import { includeIgnoreFile } from "eslint/config";
 
 export default defineConfigWithVueTs([
   vueTsConfigs.recommendedTypeChecked,
@@ -20,7 +20,7 @@ export default defineConfigWithVueTs([
     languageOptions: {
       parserOptions: {
         projectService: {
-          allowDefaultProject: [".config/wxt.ts", ".config/eslint.mjs"]
+          allowDefaultProject: [".config/eslint.mjs"]
         }
       }
     },

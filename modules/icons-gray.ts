@@ -1,8 +1,8 @@
 import "wxt";
+import { access, mkdir } from "node:fs/promises";
 import { relative, resolve } from "node:path";
 import { defineWxtModule } from "wxt/modules";
 import sharp from "sharp";
-import { ensureDir, exists } from "fs-extra";
 
 const index = defineWxtModule(async (wxt) => {
   const parsedOptions = {
@@ -11,7 +11,10 @@ const index = defineWxtModule(async (wxt) => {
     sizes: [128, 48, 32, 16]
   };
   const resolvedPath = resolve(wxt.config.srcDir, parsedOptions.baseIconPath);
-  if (!await exists(resolvedPath)) {
+  try {
+    await access(resolvedPath);
+  }
+  catch {
     return wxt.logger.warn(
       `\`[auto-icons]\` Skipping icon generation, no base icon found at ${relative(process.cwd(), resolvedPath)}`
     );
@@ -24,7 +27,7 @@ const index = defineWxtModule(async (wxt) => {
     const outputFolder = wxt2.config.outDir;
     for (const size of parsedOptions.sizes) {
       const resized = image.resize(size);
-      await ensureDir(resolve(outputFolder, "icons"));
+      await mkdir(resolve(outputFolder, "icons"), { recursive: true });
       await resized.toFile(resolve(outputFolder, `icons/${size}-gray.png`));
       output.publicAssets.push({
         type: "asset",

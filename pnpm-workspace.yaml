@@ -1,5 +1,7 @@
+minimumReleaseAge: 0
 shamefullyHoist: true
 strictPeerDependencies: false
 
-ignoredBuiltDependencies:
-  - puppeteer
+allowBuilds:
+  puppeteer: false
+  unrs-resolver: false
