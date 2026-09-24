@@ -17,33 +17,33 @@
     "lint": "eslint . --config .config/eslint.mjs"
   },
   "dependencies": {
-    "@iconify/vue": "^5.0.1",
+    "@iconify/vue": "^5.0.3",
     "@tailwindcss/vite": "^4.3.3",
     "tailwindcss": "^4.3.3",
-    "vue": "^3.5.42",
+    "vue": "^3.5.43",
     "vuetracker-analyzer": "^0.3.21"
   },
   "devDependencies": {
     "@nyariv/sandboxjs": "^0.9.7",
     "@stylistic/eslint-plugin": "^5.10.0",
-    "@types/chrome": "^0.2.9",
+    "@types/chrome": "^0.3.0",
     "@types/fs-extra": "^11.0.4",
-    "@typescript-eslint/eslint-plugin": "^8.70.0",
+    "@typescript-eslint/eslint-plugin": "^8.70.1",
     "@vue/eslint-config-typescript": "^14.9.0",
     "@wxt-dev/auto-icons": "^1.1.2",
     "@wxt-dev/module-vue": "^1.0.3",
     "changelogen": "^0.6.2",
-    "eslint": "^10.10.0",
+    "eslint": "^10.11.0",
     "eslint-import-resolver-typescript": "^4.4.5",
     "eslint-plugin-import-x": "^4.17.1",
-    "eslint-plugin-vue": "^10.11.0",
+    "eslint-plugin-vue": "^10.11.1",
     "iconify-browser-cache": "^0.4.0",
     "sharp": "^0.35.4",
     "typescript": "6.0.3",
     "ufo": "^1.6.4",
     "vue-tsc": "^3.3.11",
-    "web-ext": "^10.6.0",
+    "web-ext": "^10.7.0",
     "wxt": "^0.21.4"
   },
-  "packageManager": "pnpm@12.4.1"
+  "packageManager": "pnpm@12.6.0"
 }
