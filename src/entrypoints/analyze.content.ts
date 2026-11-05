@@ -61,7 +61,7 @@ export default defineContentScript({
           getNuxtMeta(context),
           getNuxtModules(context)
         ]);
-        framework.version = window.__unctx__?.get("nuxt-app")?.use()?.versions?.nuxt;
+        framework.version = meta.version;
         if (!framework.version && infos.vueVersion) {
           framework.version = infos.vueVersion.split(".")[0];
         }
