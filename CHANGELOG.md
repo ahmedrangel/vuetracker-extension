@@ -1,6 +1,31 @@
 # Changelog
 
 
+## v0.3.7
+
+[compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.3.6...v0.3.7)
+
+### 🩹 Fixes
+
+- **sandbox:** Assert trusted script creator ([8c5b70f](https://github.com/ahmedrangel/vuetracker-extension/commit/8c5b70f))
+- **nuxt:** Read version from metadata ([a4ed224](https://github.com/ahmedrangel/vuetracker-extension/commit/a4ed224))
+
+### 📖 Documentation
+
+- Add MIT license ([faa484a](https://github.com/ahmedrangel/vuetracker-extension/commit/faa484a))
+
+### 🏡 Chore
+
+- Update deps ([99f0356](https://github.com/ahmedrangel/vuetracker-extension/commit/99f0356))
+
+### 🎨 Styles
+
+- **popup-card:** Reorder script attrs ([0fe4959](https://github.com/ahmedrangel/vuetracker-extension/commit/0fe4959))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.3.6
 
 [compare changes](https://github.com/ahmedrangel/vuetracker-extension/compare/v0.3.5...v0.3.6)
