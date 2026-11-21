@@ -30,7 +30,7 @@
     "@types/fs-extra": "^11.0.4",
     "@typescript-eslint/eslint-plugin": "^8.72.1",
     "@vue/eslint-config-typescript": "^14.9.0",
-    "@wxt-dev/auto-icons": "^1.1.2",
+    "@wxt-dev/auto-icons": "^2.0.0",
     "@wxt-dev/module-vue": "^1.0.3",
     "changelogen": "^0.6.2",
     "eslint": "^10.14.0",
